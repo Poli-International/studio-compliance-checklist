@@ -1,124 +1,88 @@
-# Studio Compliance Checklist & Health Auditor
+# Studio Compliance Auditor
 
-> **Professional health, safety, and administrative auditor for tattoo and piercing studios.**
+> **Audit your studio against health, safety, and legal compliance standards. Generate compliance reports and identify areas needing attention.**
 
 [![License](https://img.shields.io/github/license/Poli-International/studio-compliance-checklist)](LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/Poli-International/studio-compliance-checklist)](https://github.com/Poli-International/studio-compliance-checklist/commits/main)
 [![GitHub Stars](https://img.shields.io/github/stars/Poli-International/studio-compliance-checklist?style=social)](https://github.com/Poli-International/studio-compliance-checklist/stargazers)
 
-**Live Tool:** [https://poliinternational.com/studio-compliance-checklist/](https://poliinternational.com/studio-compliance-checklist/)
+**Live Demo:** [https://poliinternational.com/tools/studio-compliance-checklist/](https://poliinternational.com/tools/studio-compliance-checklist/)
 
 ---
 
-## 📋 Overview
+## 🎯 Overview
 
-The **Studio Compliance Checklist** is a rigorous internal auditing tool designed to help studio owners verify their adherence to global biosecurity, legal, and operational standards. It provides a data-driven "Compliance Score" and generates official reports for health authority preparation.
+Audit your studio against health, safety, and legal compliance standards. Generate compliance reports and identify areas needing attention.
 
-### Key Features
+**Category:** Studio Operations
 
-1. **🔬 Biosecurity Audit**
-   - Verification of infection control protocols.
-   - Autoclave validation and spore testing frequency checks.
-   - PPE and surface decontamination standards.
-
-2. **📝 Legal & Administrative Verification**
-   - Consent form archiving and informed choice verification.
-   - staff certification tracking (Bloodborne Pathogens, First Aid).
-   - Compliance with GDPR/HIPAA for digital client records.
-
-3. **🏢 Facility Standards Tracker**
-   - Analysis of procedure area separation.
-   - Surface porosity and environmental health checks.
-   - Storage and waste management auditing.
-
-4. **📈 Dynamic Scoring & Reports**
-   - Weighted scoring based on critical safety risks.
-   - Real-time compliance visualization.
-   - Printable **Official Audit Report** for internal records.
+This is a free, open-source widget from the [Poli International Widget Suite](https://poliinternational.com/tools/) - a collection of practical tools for tattoo and piercing studios, artists, and clients. It runs entirely in the browser; no data is sent to a server.
 
 ---
 
-## 🔧 Technical Logic & Algorithms
+## ✨ Features
 
-### Weighted Compliance Scoring
-
-The engine uses a weighted scoring algorithm where critical biosecurity items carry significantly more mass than administrative items:
-
-```javascript
-totalPossible = Σ(itemWeights)
-userTotal = Σ(checkedItemWeights)
-complianceScore = (userTotal / totalPossible) * 100
-```
-
-#### Weight Distribution Examples:
-- **Biosecurity (Critical):** Validated Autoclave Cycle (Weight: 15)
-- **Legal (Major):** Signed Consent Forms (Weight: 10)
-- **Facility (Standard):** Adequate Lighting (Weight: 2)
-
-#### Compliance Thresholds:
-- **95%+:** COMPLIANT / EXCELLENCE (Green)
-- **80-94%:** CONDITIONALLY COMPLIANT (Yellow)
-- **< 80%:** CRITICAL FAILURE (Red)
+- ✅ **Studio Compliance**
+- ✅ **Health Inspection**
+- ✅ **Studio Audit**
+- ✅ **Body Art Regulations**
+- ✅ **Responsive Design** - works on desktop, tablet, and mobile.
+- ✅ **Free & Open Source** - MIT licensed.
 
 ---
 
-## 📁 File Structure
+## 🎬 Demo
 
-```
-studio-compliance-checklist/
-├── index.html              # Main audit interface
-├── css/
-│   └── style.css          # Professional clinical aesthetic
-├── js/
-│   ├── database.js        # Compliance standards and weights
-│   ├── main.js            # Scoring engine and report generator
-│   └── common.js          # Unified theme & embed logic
-└── images/
-    └── Poli-International-Co.webp  # Brand Identity
+### Try It Live
+
+**👉 [Use the tool now](https://poliinternational.com/tools/studio-compliance-checklist/)**
+
+---
+
+## 🚀 Installation
+
+### Option 1: Use Online (Recommended)
+
+No installation needed! Just visit:
+**[https://poliinternational.com/tools/studio-compliance-checklist/](https://poliinternational.com/tools/studio-compliance-checklist/)**
+
+### Option 2: Run Locally
+
+This tool is pure HTML/CSS/JS - no build step. Clone the repo and open `index.html`:
+
+```bash
+git clone https://github.com/Poli-International/studio-compliance-checklist.git
+cd studio-compliance-checklist
+# open index.html in your browser
 ```
 
 ---
 
-## 🚀 Deployment & Usage
+## 🤝 Contributing
 
-### Live Production
-This tool is integrated into the Poli International ecosystem via the **Poli Core System**. It features full synchronization with the site-wide dark mode and scientific wiki links.
-
-### Standalone Embed
-To use this tool on your own studio website, use the following iframe:
-
-```html
-<iframe src="https://poliinternational.com/wp-content/standalone-tools/studio-compliance-checklist/index.html" 
-        width="100%" 
-        height="1200" 
-        frameborder="0" 
-        style="border-radius: 12px; border: 1px solid #0693e3;">
-</iframe>
-```
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
 ---
 
-## 🎨 Branding & Standards
+## 📄 License
 
-- **Theme:** Streetwise / Clinical Dark Mode (Primary: #0693e3, Success: #10b981)
-- **Naming:** BEM (Block Element Modifier)
-- **SEO Keywords:** Tattoo studio audit, piercing health standards, studio compliance checklist, infection control for tattooers, bloodborne pathogen compliance.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 👨‍💻 Credits
+## 💬 Support
 
-**Built by:** Claude Code Agent System (opencode)
-**Client:** Poli International
-**Scientific Foundation:** [Legal & Compliance Standards Wiki](https://poliinternational.com/wp-content/standalone-tools/standards/legal-compliance-standards.html)
+### Get Help
 
----
-
-## 📧 Contact & Support
-
-**Technical Support:** [patrick@poli-international.com](mailto:patrick@poli-international.com)
-**Support Innovation:** [Buy Me a Coffee](https://ko-fi.com/patrickkofi)
+- 📧 **Email**: <support@poliinternational.com>
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Poli-International/studio-compliance-checklist/issues)
 
 ---
 
-© 2026 Poli International Ltd. | Precision Engineering for the Body Art Industry.
+<div align="center">
+
+**Made with ❤️ by [Poli International](https://poliinternational.com)**
+
+[Website](https://poliinternational.com) • [Tools](https://poliinternational.com/tools/) • [GitHub](https://github.com/Poli-International)
+
+</div>

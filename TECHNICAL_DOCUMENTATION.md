@@ -1,4 +1,4 @@
-# Studio Compliance Auditor - Technical Documentation
+# Studio Inspection Readiness Checklist - Technical Documentation
 
 ## Table of Contents
 
@@ -18,415 +18,336 @@
 
 ## Architecture Overview
 
+### Purpose
+
+The Studio Inspection Readiness Checklist is a static, client-side web tool that helps tattoo and body piercing studios prepare for health and safety inspections. It organizes twenty hygiene and safety requirements across eight work areas, tracks the preparation status of each item, records where supporting evidence is stored, and generates a printable binder index for the studio's physical inspection folder.
+
 ### Technology Stack
 
-The Studio Compliance Auditor is a client-side only web application built with:
-
-- **HTML5** - Semantic markup and tab-based navigation
-- **CSS3** - Custom stylesheets with dark/light mode support
-- **Vanilla JavaScript (ES6)** - No frameworks, no external dependencies
-- **Local Storage** - Theme persistence across sessions
+- **HTML5** for markup (`index.html` plus seven localized documentation pages).
+- **CSS** via two external stylesheets: `/tools/studio-compliance-checklist/css/style.css` and `/tools/shared/print.css` (print media), plus `/tools/shared/a11y.css` for accessibility.
+- **Vanilla JavaScript** (no frameworks, no build step, no external runtime dependencies).
+- **Browser `localStorage`** for persistence.
+- **`postMessage`** for iframe height auto-resizing and theme synchronization with a parent wrapper.
 
 ### File Structure
 
 ```
-/studio-compliance-checklist/
-├── index.html                  # Main entry point, tab navigation, embed modal
-├── documentation.html          # Full documentation page (loaded in iframe)
+/tools/studio-compliance-checklist/
+├── index.html                  Main application shell
 ├── css/
-│   ├── poli-standard.css       # Standard Poli styles (referenced but not provided)
-│   └── style.css               # Tool-specific styles (referenced but not provided)
+│   └── style.css               Application styling
+├── images/
+│   └── Poli-International-Co.webp
 └── js/
-    ├── database.js             # Compliance data definitions
-    ├── main.js                 # Core application logic and rendering
-    └── common.js               # Shared utilities (theme, embed, resize)
+    ├── i18n.js                 Translation dictionary (loaded first)
+    ├── database.js             Checklist content and regional data
+    ├── main.js                 Application logic and rendering
+    └── common.js               Theme, iframe resize, embed modal, cross-tool links
+
+/tools/shared/
+├── print.css                   Print stylesheet
+└── a11y.css                    Accessibility stylesheet
+
+/js/
+└── input-guards.js             Shared input sanitization guards
 ```
 
-### Component / Logic Breakdown
+Localized documentation pages (each a standalone HTML file with its own inline styles):
 
-| Component | File | Purpose |
-|-----------|------|---------|
-| Tab Navigation | `index.html` | Switches between Tool, Documentation, and Embed views |
-| Compliance Database | `database.js` | Defines all audit categories, items, and weights |
-| Application Renderer | `main.js` | Renders the checklist UI, handles user input, calculates scores |
-| Report Generator | `main.js` | Generates and displays the compliance report modal |
-| Theme Manager | `common.js` | Handles dark/light mode toggling and persistence |
-| Embed Modal | `common.js` | Provides iframe embed code for external sites |
-| Auto-Resizer | `common.js` | Sends height updates to parent iframe |
+- `documentation.html` (English)
+- `documentation-de.html` (Deutsch)
+- `documentation-es.html` (Español)
+- `documentation-fr.html` (Français)
+- `documentation-it.html` (Italiano)
+- `documentation-nl.html` (Nederlands)
+- `documentation-pt.html` (Português)
+
+### Script Load Order
+
+Scripts load in strict order because each depends on the previous:
+
+1. `/js/input-guards.js` (in `<head>`)
+2. `/tools/studio-compliance-checklist/js/i18n.js` (translation dictionary)
+3. `/tools/studio-compliance-checklist/js/database.js` (checklist data)
+4. `/tools/studio-compliance-checklist/js/main.js` (application logic)
+5. `/tools/studio-compliance-checklist/js/common.js` (utilities)
+
+### Component Breakdown
+
+| Component | Responsibility |
+|---|---|
+| `index.html` | Page shell, header with language selector, embed button, dark mode toggle, footer, embed modal, `#app-root` mount point. |
+| `i18n.js` | Holds the translation dictionary consumed by `t()` in `main.js`. |
+| `database.js` | Holds the checklist items, the eight work areas, and the four regional jurisdiction definitions. |
+| `main.js` | Renders the app into `#app-root`, manages status state, counters, tabs, region selection, binder index, reset, and print. |
+| `common.js` | Theme toggle, iframe height messaging, embed modal open/close/copy, cross-tool link wiring. |
+
+### Iframe Content Hider
+
+`index.html` includes an inline script that detects when the page is loaded inside an iframe (`window.self !== window.top`). When embedded, it injects a style block that hides the header, footer, breadcrumbs, discovery map, feedback sections, related tools, share cards, support cards, dark mode toggle, and global footer, and zeroes out body padding and margin. This keeps the embedded view limited to the checklist itself.
 
 ---
 
 ## Data Schemas
 
-### Compliance Database (`COMPLIANCE_DATABASE`)
+### Checklist Item
 
-Defined in `database.js` as a constant array of category objects.
+Each inspection item in `database.js` is an object. The rendered card exposes the following fields (field names as surfaced in the UI and consumed by `main.js`):
 
-**Category Object:**
+| Field | Type | Description | Example |
+|---|---|---|---|
+| `id` | string | Stable identifier used as the `localStorage` status key. | `"hand_hygiene"` |
+| `area` | string | One of the eight work areas. | `"Hand hygiene and PPE"` |
+| `text` | string | The inspector-facing requirement. | `"Hands washed and dried before and after every procedure"` |
+| `authority` | string | Regulator or standard reference for the selected region. | `"Local authority / Health and Safety at Work etc. Act 1974"` |
+| `evidence` | string | Where the supporting evidence is kept. | `"Wash station log / training records"` |
+| `toolLink` | string (optional) | URL to a companion Poli evidence tool, present only on items that require technical logs. | `"https://poliinternational.com/autoclave-calculator/"` |
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | string | Unique category identifier |
-| `category` | string | Display name for the category |
-| `icon` | string | Emoji icon for the category |
-| `items` | array | Array of checklist item objects |
+### Status Values
 
-**Item Object:**
+Status is stored as a string per item. The three assignable values plus the default:
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | string | Unique item identifier (e.g., "b1", "d3", "f5") |
-| `text` | string | The compliance question text |
-| `weight` | number | Integer weight value for scoring |
+| Value | Meaning |
+|---|---|
+| `ready` | Item is prepared. |
+| `not_yet` | Item still needs preparation. |
+| `na` | Item is not applicable to this studio. |
+| (unset) | Item has not been reviewed; treated as "not checked". |
 
-**Example Data:**
+Clicking an already-active status button clears the entry back to unset.
 
-```javascript
-const COMPLIANCE_DATABASE = [
-    {
-        id: "biosecurity",
-        category: "Biosecurity & Infection Control",
-        icon: "🔬",
-        items: [
-            { id: "b1", text: "Is there a designated hand-washing station in the procedure area?", weight: 10 },
-            { id: "b2", text: "Are EPA-registered, hospital-grade disinfectants used on all surfaces?", weight: 10 },
-            { id: "b3", text: "Are single-use, sterile gloves used for every procedure?", weight: 5 },
-            { id: "b4", text: "Is there a sharp container located within arm's reach of the procedure area?", weight: 10 },
-            { id: "b5", text: "Are all reusable tools processed through a validated autoclave cycle?", weight: 15 }
-        ]
-    },
-    {
-        id: "documentation",
-        category: "Documentation & Legal",
-        icon: "📝",
-        items: [
-            { id: "d1", text: "Is an informed consent form signed and archived for every client?", weight: 10 },
-            { id: "d2", text: "Are sterilization logs maintained for every autoclave cycle?", weight: 10 },
-            { id: "d3", text: "Are biological indicator (spore test) results archived weekly?", weight: 10 },
-            { id: "d4", text: "Is there a bloodborne pathogen certificate on file for all staff?", weight: 5 },
-            { id: "d5", text: "Are ink and jewelry batch certifications accessible for audit?", weight: 5 }
-        ]
-    },
-    {
-        id: "facility",
-        category: "Facility Standards",
-        icon: "🏢",
-        items: [
-            { id: "f1", text: "Is the procedure area physically separated from the waiting area?", weight: 5 },
-            { id: "f2", text: "Are floors and walls constructed of non-porous, easy-to-clean materials?", weight: 5 },
-            { id: "f3", text: "Is the studio free of animals (except service animals)?", weight: 5 },
-            { id: "f4", text: "Is there adequate lighting in the procedure area?", weight: 2 },
-            { id: "f5", text: "Is the sterilization room separate from the procedure area?", weight: 10 }
-        ]
-    }
-];
-```
+### Region Codes
 
-### User Responses (`userResponses`)
+| Code | Region |
+|---|---|
+| `uk` | United Kingdom |
+| `eu` | European Union |
+| `us` | United States |
+| `au` | Australia |
 
-Defined in `main.js` as a module-level object.
+### localStorage Keys
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `[itemId]` | boolean | `true` if checkbox is checked, `false` or `undefined` if unchecked |
+| Key | Contents |
+|---|---|
+| `studio_inspection_readiness_status` | Map of item `id` to status string (`ready`, `not_yet`, or `na`). |
+| `studio_inspection_readiness_region` | Selected region code (`uk`, `eu`, `us`, or `au`). |
+| `studio_inspection_readiness_studioname` | Studio name string entered for the binder index cover sheet. |
+| `theme` | `"dark"` or `"light"` (written by `common.js`). |
 
-**Example:**
+### Counters
 
-```javascript
-let userResponses = {
-    "b1": true,
-    "b2": false,
-    "b3": true,
-    // ... other item IDs
-};
-```
+The counter bar above the tabs displays five values:
+
+| Counter | Meaning |
+|---|---|
+| Total items | Total number of checklist items. |
+| Ready | Items with status `ready`. |
+| To prepare | Items with status `not_yet`. |
+| Not applicable | Items with status `na`. |
+| Not checked | Items with no status set. |
 
 ---
 
 ## Calculation / Logic Algorithms
 
-### Score Calculation (`calculateScore()`)
+The tool performs no scoring or percentage calculation. Its logic is state tracking, filtering, and rendering.
 
-Located in `main.js`. This function computes the weighted compliance score.
+### Theme Initialization (`common.js`)
 
-**Algorithm Steps:**
+1. On `DOMContentLoaded`, read `localStorage.getItem('theme')`, defaulting to `"dark"` if absent or if storage access throws.
+2. Call `setTheme(savedTheme, false)` to apply the class without re-saving.
+3. `setTheme(theme, save)` adds `light-mode` and removes `dark-mode` for `"light"`, or the reverse for `"dark"`, and updates the toggle icon (`☀️` for light, `◐` for dark).
+4. If `save` is true, write the theme to `localStorage` inside a `try/catch` that silently ignores restricted-iframe write failures.
 
-1. Initialize `totalPossible = 0` and `userTotal = 0`
-2. Iterate through each category in `COMPLIANCE_DATABASE`
-3. For each item in the category:
-   - Add `item.weight` to `totalPossible`
-   - If `userResponses[item.id]` is `true`, add `item.weight` to `userTotal`
-4. Calculate percentage: `Math.round((userTotal / totalPossible) * 100)`
-5. Return the integer percentage
+### Theme Toggle Handler
 
-**Formula:**
+On click of `#darkModeToggle`, compute the target theme as the opposite of the current body class and call `setTheme(target, true)`.
 
-```
-complianceScore = round((sum of checked item weights / sum of all item weights) × 100)
-```
+### Parent Theme Sync
 
-**Weight Distribution:**
+A `message` listener reads `event.data.theme` and calls `setTheme(event.data.theme, true)`, allowing a parent wrapper to push a theme into the iframe.
 
-| Category | Items | Total Weight |
-|----------|-------|--------------|
-| Biosecurity & Infection Control | 5 | 50 |
-| Documentation & Legal | 5 | 40 |
-| Facility Standards | 5 | 27 |
-| **Total** | **15** | **117** |
+### Iframe Auto-Resize (`common.js`)
 
-### Status Determination (`showReport()`)
+1. `sendHeight()` posts `{ height: document.body.scrollHeight + 40 }` to the parent window when the page is framed.
+2. It runs once on load, on `resize`, 100 ms after any `click` or `change`, and on any DOM mutation observed by a `MutationObserver` watching `document.body` with `childList` and `subtree` enabled.
 
-Located in `main.js`. Determines compliance status based on score.
+### Status Assignment (`main.js`)
 
-| Score Range | Status | Color Variable |
-|-------------|--------|----------------|
-| 95%+ | COMPLIANT / EXCELLENCE | `var(--success)` |
-| 80-94% | CONDITIONALLY COMPLIANT | `var(--warning)` |
-| < 80% | CRITICAL FAILURE | `var(--error)` |
+1. Each item renders three status buttons: Ready, Not yet, Not applicable.
+2. Clicking a button sets that item's status in the in-memory map and persists the map to `studio_inspection_readiness_status`.
+3. Clicking the button that matches the current status clears the entry (returns the item to "not checked").
+4. Counters recompute from the map after every change.
 
-### Application Rendering (`renderApp()`)
+### Region Selection (`main.js`)
 
-Located in `main.js`. This function:
+1. The region selector offers United Kingdom, European Union, United States, and Australia.
+2. Selecting a region persists the code to `studio_inspection_readiness_region` and updates the authority/standard text shown on each item.
+3. An explanatory note describes the inspecting authorities and standards for the selected region.
 
-1. Calls `calculateScore()` to get current score
-2. Builds HTML string containing:
-   - Score header with percentage and visual progress bar
-   - Compliance sections with checkboxes for each item
-   - "Generate Official Report" button
-3. Sets `appRoot.innerHTML` to the generated HTML
-4. Attaches change event listeners to all checkboxes
-5. Attaches click listener to the report button
+### Tab Filtering (`main.js`)
 
-### Report Generation (`showReport()`)
+1. **Inspection checklist** tab shows all items.
+2. **Items to prepare** tab filters to items with status `not_yet` only. When none remain, it shows the message "No items marked as 'Not yet'".
+3. **Binder index** tab renders the printable index table.
 
-Located in `main.js`. This function:
+### Binder Index Generation (`main.js`)
 
-1. Calls `calculateScore()` to get final score
-2. Determines status based on score thresholds
-3. Creates a modal overlay with:
-   - Report title
-   - Score percentage
-   - Status text (color-coded)
-   - Current date
-   - Print and Close buttons
-4. Inserts the modal into the DOM
+1. The index table has six columns: Area, Typical inspection item, Regulator / standard, Evidence location / tool, Current status, and Last checked date.
+2. The studio name field (`Studioname` / "Enter your studio name") is persisted to `studio_inspection_readiness_studioname` and printed on the cover sheet.
+3. The print action outputs the studio name, region, date, and the full table with blank sign-off lines for handwritten initials and dates.
+
+### Reset (`main.js`)
+
+1. Clicking "Reset all statuses" opens a confirmation dialog: "Are you sure you want to reset all statuses? This will clear all entries in this browser."
+2. On confirmation, all entries are cleared and every item returns to "not checked".
+
+### Embed Modal (`common.js`)
+
+1. The embed URL is assembled from a scheme prefix (`['http', 's:'].join('')`) and the domain `poliinternational.com`, producing the absolute tool URL.
+2. The textarea is pre-filled with an `<iframe>` snippet pointing at that URL, with `width="100%"`, `height="800"`, and `border:0; border-radius:12px`.
+3. Clicking the embed button opens the modal, locks body scroll, and focuses/selects the textarea.
+4. The modal closes via the close button or by clicking the backdrop, restoring body scroll.
+5. The copy button selects the textarea and copies via `navigator.clipboard.writeText`, falling back to `document.execCommand('copy')`. On success it swaps the button label to a checkmark plus the translated "Copied!" string for 2000 ms.
 
 ---
 
 ## API Reference
 
-### Public Functions
+The tool exposes no public JavaScript API. All functions are module-scoped inside `DOMContentLoaded` handlers. The following handlers and DOM contracts are the effective interface.
 
-#### `calculateScore()`
+### DOM Element Contracts
 
-- **Location:** `main.js`
-- **Parameters:** None (reads from `userResponses` and `COMPLIANCE_DATABASE`)
-- **Returns:** `number` - Integer percentage (0-100)
-- **Behavior:** Computes weighted compliance score based on checked items
+| Element ID | Type | Behavior |
+|---|---|---|
+| `#languageSelector` | `<select>` | Switches UI language across the seven supported locales. |
+| `#embedBtn` | `<button>` | Opens the embed modal. |
+| `#darkModeToggle` | `<button>` | Toggles light/dark theme. |
+| `#app-root` | `<div>` | Mount point rendered by `main.js`. |
+| `#embedModal` | `<div>` | Embed modal dialog (`role="dialog"`, `aria-modal="true"`). |
+| `#modalClose` | `<button>` | Closes the embed modal. |
+| `#embedCode` | `<textarea readonly>` | Holds the generated iframe embed snippet. |
+| `#copyEmbedCode` | `<button>` | Copies the embed snippet to the clipboard. |
+| `#moreToolsBtn` | `<a>` | Links to the Poli tools hub. |
 
-#### `renderApp()`
+### `common.js` Functions
 
-- **Location:** `main.js`
-- **Parameters:** None
-- **Returns:** `void`
-- **Behavior:** Re-renders the entire application UI with current state
+| Function | Parameters | Behavior |
+|---|---|---|
+| `setTheme(theme, save)` | `theme`: `"light"` or `"dark"`; `save`: boolean | Applies the theme class, updates the toggle icon, and optionally persists to `localStorage`. |
+| `sendHeight()` | none | Posts the current document height plus 40 px to the parent window when framed. |
+| `updateFeedback()` | none | (Inner function of the copy handler) Temporarily replaces the copy button label with a success message. |
 
-#### `showReport()`
+### `common.js` Event Listeners
 
-- **Location:** `main.js`
-- **Parameters:** None
-- **Returns:** `void`
-- **Behavior:** Generates and displays a compliance report modal
+| Target | Event | Effect |
+|---|---|---|
+| `#darkModeToggle` | `click` | Toggles theme. |
+| `window` | `message` | Applies a theme pushed from the parent wrapper. |
+| `window` | `resize` | Re-sends iframe height. |
+| `document` | `click`, `change` | Re-sends iframe height after 100 ms. |
+| `#embedBtn` | `click` | Opens the embed modal. |
+| `#modalClose` | `click` | Closes the embed modal. |
+| `window` | `click` | Closes the modal when the backdrop is clicked. |
+| `#copyEmbedCode` | `click` | Copies the embed snippet. |
 
-#### `new_Date()`
+### `main.js` Responsibilities
 
-- **Location:** `main.js`
-- **Parameters:** None
-- **Returns:** `Date` object
-- **Behavior:** Helper function that returns `new Date()` for report timestamp
-
-### Event Handlers (in `common.js`)
-
-#### Theme Toggle
-
-- **Element:** `#darkModeToggle`
-- **Event:** `click`
-- **Behavior:** Toggles between dark and light mode, persists to `localStorage`
-
-#### Embed Modal
-
-- **Element:** `#embedBtn` or `#embed-button`
-- **Event:** `click`
-- **Behavior:** Opens embed modal with iframe code
-
-#### Copy Embed Code
-
-- **Element:** `#copyEmbedCode`
-- **Event:** `click`
-- **Behavior:** Copies embed code to clipboard, shows confirmation
-
-#### Auto-Resize
-
-- **Element:** `window`
-- **Event:** `resize`, `click`, `change`
-- **Behavior:** Sends height updates to parent iframe via `postMessage`
+`main.js` renders `#app-root` through the translation function `t()` and manages: region selection and persistence, per-item status assignment and persistence, the five-counter bar, tab switching and filtering, the binder index table, the studio name field, reset with confirmation, and the print action.
 
 ---
 
 ## Integration Guide
 
-### Standalone Embedding
+### Standalone Use
 
-The tool can be embedded in any website using an iframe:
+Open the live URL directly:
 
-```html
-<iframe 
-    src="https://poliinternational.com/tools/studio-compliance-checklist/index.html" 
-    width="100%" 
-    height="1200" 
-    frameborder="0" 
-    style="border-radius:12px;">
-</iframe>
+```
+https://poliinternational.com/tools/studio-compliance-checklist/
 ```
 
-### Embed Code (from tool UI)
+No installation, account, or server is required. All state stays in the visitor's browser.
 
-The tool provides a pre-generated embed code in the "Embed Code" tab. Users can copy it directly from the tool interface.
+### Iframe Embedding
+
+The tool ships with a built-in embed generator. Clicking the "Free Embed" button opens a modal containing a ready-to-copy snippet:
+
+```html
+<iframe src="https://poliinternational.com/tools/studio-compliance-checklist/index.html" width="100%" height="800" frameborder="0" style="border:0; border-radius:12px;"></iframe>
+```
+
+When embedded, the built-in iframe content hider automatically suppresses the header, footer, breadcrumbs, discovery map, feedback sections, related tools, share cards, support cards, dark mode toggle, and global footer so only the checklist is visible. The embedded page also posts its height to the parent so the host can resize the frame, and accepts a `theme` value via `postMessage` from the parent.
 
 ### Dependencies
 
-The tool is **dependency-free**. It uses only:
-- Vanilla JavaScript (ES6)
-- HTML5
-- CSS3
-
-No external libraries, frameworks, or CDN resources are required.
-
-### Iframe Communication
-
-The tool sends height updates to the parent window via `postMessage`:
-
-```javascript
-window.parent.postMessage({ height: document.body.scrollHeight + 50 }, '*');
-```
-
-This allows the iframe to auto-resize based on content.
-
-### Theme Support
-
-The tool listens for theme messages from the parent window:
-
-```javascript
-window.addEventListener('message', function(event) {
-    if (event.data && event.data.theme) {
-        setTheme(event.data.theme, true);
-    }
-});
-```
+The tool is dependency-free static HTML, CSS, and JavaScript. It loads no external libraries, fonts, or CDNs. The only cross-origin behavior is the optional `postMessage` handshake with a parent wrapper.
 
 ---
 
 ## Customization
 
-### Modifying Compliance Items
-
-To add, remove, or modify compliance items, edit the `COMPLIANCE_DATABASE` array in `js/database.js`:
-
-```javascript
-// Example: Add a new item to the Biosecurity category
-{
-    id: "biosecurity",
-    category: "Biosecurity & Infection Control",
-    icon: "🔬",
-    items: [
-        // ... existing items
-        { id: "b6", text: "Are all surfaces disinfected between clients?", weight: 8 }
-    ]
-}
-```
-
-### Changing Weights
-
-Adjust the `weight` values in `database.js` to change scoring impact. Higher values increase the item's contribution to the final score.
-
-### Visual Customization
-
-- **CSS:** Edit `css/style.css` for tool-specific styles
-- **Theme Colors:** Modify CSS custom properties in `poli-standard.css`
+- **Language:** The header language selector switches among English, Deutsch, Español, Français, Italiano, Português, and Nederlands. Strings are sourced from `i18n.js` and resolved through `t()`.
+- **Region:** The jurisdiction selector switches the authority and standard references among the UK, EU, US, and Australia datasets in `database.js`.
+- **Theme:** The dark mode toggle switches between light and dark, and the choice persists in `localStorage` under the `theme` key. A parent wrapper can override the theme by posting `{ theme: "light" | "dark" }`.
+- **Studio name:** The binder index cover sheet accepts a free-text studio name, persisted under `studio_inspection_readiness_studioname`.
 
 ---
 
 ## Performance
 
-- **Bundle Size:** Minimal - three small JavaScript files and two CSS files
-- **Rendering:** Full re-render on every checkbox change (acceptable for small dataset of 15 items)
-- **Memory:** No memory leaks; all data is stored in simple JavaScript objects
-- **Network:** Zero external requests after initial page load
+- No network requests after initial page load; all data is bundled in `i18n.js` and `database.js`.
+- No build step, bundler, or runtime framework.
+- Rendering is direct DOM manipulation into `#app-root`.
+- The `MutationObserver` in `common.js` re-sends iframe height on DOM changes, which keeps embedded layouts correct at the cost of a `postMessage` per mutation batch.
+- State reads and writes are limited to `localStorage`, which is synchronous and fast for the small payloads involved.
 
 ---
 
 ## Browser Compatibility
 
-The tool uses standard ES6 features and should work in:
-
-| Browser | Minimum Version |
-|---------|----------------|
-| Chrome | 49+ |
-| Firefox | 52+ |
-| Safari | 10+ |
-| Edge | 14+ |
-| Opera | 36+ |
-
-**Note:** Internet Explorer is not supported due to ES6 syntax and `postMessage` usage.
+- Uses standard DOM APIs (`querySelector`, `classList`, `addEventListener`, `MutationObserver`).
+- Uses `navigator.clipboard.writeText` with a fallback to `document.execCommand('copy')` for older browsers.
+- Uses `localStorage` inside `try/catch` blocks so restricted iframe contexts degrade gracefully rather than throwing.
+- `MutationObserver` usage is guarded by a `typeof` check.
+- No transpilation or polyfills are included; the tool targets modern evergreen browsers.
 
 ---
 
 ## Security
 
-### Input Handling
-
-- All user input is limited to checkbox toggles (boolean values)
-- No text input fields exist in the tool
-- No form submissions or data transmission
-
-### XSS Prevention
-
-- The tool uses `innerHTML` for rendering, but all dynamic content is:
-  - Pre-defined strings from `COMPLIANCE_DATABASE`
-  - Numeric values from `calculateScore()`
-  - Boolean states from `userResponses`
-- No user-supplied text is ever rendered in the DOM
-
-### Data Privacy
-
-- All data remains client-side only
-- No data is sent to any server
-- No cookies are used
-- Only `localStorage` is used for theme preference
-
-### Iframe Security
-
-- The tool sets `document.documentElement.setAttribute('data-theme', 'dark')` when loaded in an iframe
-- It listens for `postMessage` events only from trusted sources
+- **No server transmission:** All user input stays in `localStorage` on the visitor's device. Nothing is sent to Poli International or any external server.
+- **Input handling:** The tool loads a shared `/js/input-guards.js` script in the head, which provides input sanitization guards for the page.
+- **Embed snippet construction:** The embed URL is assembled at runtime from a split scheme prefix and the domain constant rather than a literal string, avoiding prohibited literal URL patterns in source.
+- **Iframe isolation:** The content hider only activates when the page is framed, and it hides chrome elements rather than altering application logic.
+- **No authentication or user accounts:** There is no login, no cookies for identity, and no central database.
 
 ---
 
 ## Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0.0 | Current | Initial release with 3 compliance categories, 15 checklist items, weighted scoring, and report generation |
+### 1.0.0
+
+- Initial release of the Studio Inspection Readiness Checklist.
+- Twenty inspection items across eight work areas.
+- Four regional jurisdictions: United Kingdom, European Union, United States, Australia.
+- Seven UI languages: English, Deutsch, Español, Français, Italiano, Português, Nederlands.
+- Status tracking with Ready, Not yet, and Not applicable states, plus a not-checked default.
+- Five-counter preparation bar.
+- Items-to-prepare filtered view.
+- Printable binder index with studio name, region, date, and sign-off lines.
+- Reset-all-statuses with confirmation.
+- Dark and light theme with persistence.
+- Free iframe embed generator with copy-to-clipboard.
+- Localized documentation pages in seven languages.
 
 ---
 
 ## Support / Contact
 
-For technical support, feature requests, or custom integration assistance:
+For questions, bug reports, or integration help, contact:
 
-- **Email:** support@poliinternational.com
-- **Contact Form:** https://poliinternational.com/contact-us/
-- **Tool URL:** https://poliinternational.com/tools/studio-compliance-checklist/
+**support@poliinternational.com**
 
----
-
-*Documentation generated from source code version 1.0.0*
+This tool is provided for internal preparation only and does not constitute a legal guarantee of compliance. Always verify your studio requirements with your local licensing authority.

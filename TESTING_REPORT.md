@@ -1,26 +1,39 @@
-# Studio Compliance Auditor - Testing Report
+# Studio Inspection Readiness Checklist - Testing Report
+
+**Tool:** Studio Inspection Readiness Checklist
+**Slug:** `studio-compliance-checklist`
+**Live URL:** https://poliinternational.com/tools/studio-compliance-checklist/
+**Report type:** Static QA review of shipped source (HTML, CSS, JS, i18n, database)
+**Scope:** `index.html`, `js/common.js`, `js/main.js`, `js/database.js`, `js/i18n.js`, `css/style.css`, shared `print.css` and `a11y.css`, plus the seven localized documentation pages.
+
+---
 
 ## Executive Summary
 
-The **Studio Compliance Auditor** tool is functionally complete and ready for production deployment. The application correctly implements a weighted compliance scoring system based on a static database of 15 audit items across 3 categories. All core features, checklist interaction, real-time scoring, report generation, work as designed. The tool is lightweight, self-contained, and suitable for embedding in third-party sites.
+**Verdict: PRODUCTION READY (with minor recommendations).**
 
-**Verdict: Production Ready** with minor documentation recommendations.
+The Studio Inspection Readiness Checklist is a client-side, dependency-light tool. It renders a 20-item, 8-area inspection checklist across four regulatory regions (UK, EU, US, AU), tracks a per-item readiness status, filters outstanding items, and generates a printable binder index. All state is persisted to `localStorage` under three documented keys and is never transmitted.
+
+The codebase is small, self-contained, and free of network calls, third-party trackers, or server-side dependencies. The logic is deterministic and easy to reason about. The main risks are not functional but cosmetic and editorial: the documentation pages carry a `noindex, nofollow` meta tag, and several localized docs use ASCII transliterations in the language switcher. Neither blocks the tool from working.
+
+No blocking defects were found. The tool behaves as documented.
 
 ---
 
 ## Test Categories
 
-| Category | Scope | Status |
-|---|---|---|
-| HTML Structure & Semantics | Tab navigation, app root, report modal, embed modal | ✅ PASS |
-| CSS / Responsiveness | Dark/light mode, layout adaptation | ✅ PASS |
-| JavaScript Functionality | Event handlers, scoring, report generation | ✅ PASS |
-| Calculation / Logic Accuracy | Weighted scoring formula | ✅ PASS |
-| Data Integrity | Compliance database structure | ✅ PASS |
-| Accessibility | WCAG 2.1 basic checks | ⚠️ MINOR ISSUES |
-| Cross-Browser | Modern browser compatibility | ✅ PASS |
-| Performance | Asset sizes, load time | ✅ PASS |
-| Security | XSS, data exposure | ✅ PASS |
+| # | Category | Method | Result |
+|---|----------|--------|--------|
+| 1 | HTML structure & semantics | Static source inspection | PASS |
+| 2 | CSS / responsiveness | Source inspection + layout reasoning | PASS |
+| 3 | JavaScript functionality | Function-by-function trace | PASS |
+| 4 | Calculation / logic accuracy | Manual walkthrough of counters & status model | PASS |
+| 5 | Data integrity | localStorage key/value audit | PASS |
+| 6 | Accessibility (WCAG basics) | Attribute & markup audit | PASS (minor notes) |
+| 7 | Cross-browser | API surface review | PASS |
+| 8 | Performance | Asset & runtime review | PASS |
+| 9 | Security | Data-flow & DOM audit | PASS |
+| 10 | Edge cases | Input & state boundary review | PASS (observations) |
 
 ---
 
@@ -28,197 +41,191 @@ The **Studio Compliance Auditor** tool is functionally complete and ready for pr
 
 ### 1. HTML Structure & Semantics
 
-| Test ID | Description | Result | Observation |
-|---|---|---|---|
-| HTML-01 | Tab navigation renders correctly | ✅ PASS | Three tabs present: `data-tab="tool"`, `data-tab="docs"`, `data-tab="embed"`. Default active tab is "Tool" with blue background (`#3B82F6`). |
-| HTML-02 | App root element exists | ✅ PASS | `<div id="app-root">` present in `#tab-tool`. Initial content shows "Initializing Compliance Database..." |
-| HTML-03 | Documentation iframe loads | ✅ PASS | `#tab-docs` contains `<iframe src="./documentation.html">` with `min-height:800px` |
-| HTML-04 | Embed modal structure | ✅ PASS | `#embedModal` contains `#embedCode` textarea and `#copyEmbedCode` button. Modal hidden by default (`display:none`). |
-| HTML-05 | Report modal dynamically inserted | ✅ PASS | `showReport()` creates `.report-overlay` with `.report-modal` containing score, status, date, and action buttons. |
-| HTML-06 | Powered-by footer present | ✅ PASS | Two footer links: inline "Powered by Poli International" and `.powered-by-footer` with "POWERED BY POLI INTERNATIONAL" |
+**Result: PASS**
+
+- `index.html` declares `<!DOCTYPE html>`, `lang="en"`, and a responsive viewport meta. Title and description are present and consistent with the tool's purpose.
+- The document uses a real landmark structure: `<header class="site-header">`, `<main class="checklist-engine">`, and `<footer class="site-footer">`. The app body is injected into `<div id="app-root">`, which is the single dynamic mount point.
+- The header exposes a real `<h1 id="appHeaderTitle">` and a subtitle `<p id="appHeaderSubtitle">`, both of which are re-written by the i18n layer via `t()`.
+- The language selector is a genuine `<select id="languageSelector">` with a `<label for="languageSelector" class="visually-hidden" id="langSelectLabel">`. Seven options are present: `en`, `de`, `es`, `fr`, `it`, `pt`, `nl`.
+- The embed modal is correctly marked up: `<div id="embedModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">`, with a labelled close button (`aria-label="Close modal"`) and a read-only `<textarea id="embedCode" aria-label="Embed HTML code">`.
+- The embed code textarea is `readonly`, which is the correct pattern for copy-only content.
+- Script load order is explicit and correct: `i18n.js` → `database.js` → `main.js` → `common.js`. The i18n dictionary and database are available before the app logic runs, and `common.js` (which wires the modal and theme) runs last.
+- A `<meta name="robots" content="noindex, nofollow">` is present on `index.html`. This is intentional for a tool page that should not compete with the canonical marketing page, but it is worth confirming it matches the site's indexing strategy.
+
+**Observation:** The `<h1>` in the header is the only top-level heading in the app shell; the injected content should continue the heading hierarchy (h2/h3) rather than introduce a second h1. The documentation pages follow this correctly.
 
 ### 2. CSS / Responsiveness
 
-| Test ID | Description | Result | Observation |
-|---|---|---|---|
-| CSS-01 | Dark mode default | ✅ PASS | `body` has class `dark-mode`. Background `#0f0f0f`, text `#fff`. |
-| CSS-02 | Light mode toggle | ✅ PASS | `common.js` `setTheme()` adds/removes `light-mode` class. Toggle button updates icon text (`☀️` or `◐`). |
-| CSS-03 | Score bar visual | ✅ PASS | `.score-bar-fill` width set dynamically via inline style `width: ${score}%` |
-| CSS-04 | Report modal overlay | ✅ PASS | `.report-overlay` covers full viewport. `.report-modal` centered with `border-left-color` matching status color. |
-| CSS-05 | Checklist items | ✅ PASS | Each item is a `<label class="checklist-item">` with checkbox, custom span, and text span. |
-| CSS-06 | Embed modal styling | ✅ PASS | Dark background (`#1a1a1a`), green monospace textarea (`#10B981`), blue button. |
+**Result: PASS**
+
+- Styling is split cleanly: `css/style.css` for the app, `tools/shared/print.css` for print, `tools/shared/a11y.css` for accessibility helpers.
+- The body ships with `class="dark-mode"` by default, and `common.js` immediately reconciles the class against the saved theme. This avoids a flash of the wrong theme on first paint for returning users.
+- Print stylesheets are linked with `media="print"`, so they do not affect screen rendering.
+- The layout uses a `.container` wrapper and a single-column `main`, which is the correct baseline for a checklist that must remain readable on a phone at the point of inspection.
+- The embed modal uses a class-based open state (`is-open`) and `body.style.overflow = 'hidden'` while open, which prevents background scroll behind the dialog.
+
+**Observation:** No explicit `@media` breakpoints were visible in the reviewed fragments. The single-column container pattern is inherently responsive, but a manual check at 320px width is recommended to confirm the counter bar and status buttons wrap without horizontal scroll.
 
 ### 3. JavaScript Functionality
 
-| Test ID | Description | Result | Observation |
-|---|---|---|---|
-| JS-01 | Tab switching | ✅ PASS | Click handler updates all tabs: sets clicked tab to blue (`#3B82F6`), others to dark (`#222`). Shows corresponding `#tab-{name}` div. |
-| JS-02 | Theme persistence | ✅ PASS | `localStorage.getItem('theme')` read on load. `localStorage.setItem('theme', theme)` on toggle. |
-| JS-03 | Iframe height auto-resize | ✅ PASS | `sendHeight()` posts `{ height: document.body.scrollHeight + 50 }` to parent. Observer watches DOM mutations. |
-| JS-04 | Embed code generation | ✅ PASS | `cleanUrl` derived from `window.location.href` (stripped query/fragment). Textarea set to `<iframe src="{cleanUrl}" ...>` |
-| JS-05 | Copy embed code | ✅ PASS | `navigator.clipboard.writeText()` used. Button text changes to "✅ Copied!" for 2 seconds. |
-| JS-06 | Checklist checkbox toggle | ✅ PASS | `change` event on each checkbox updates `userResponses[item.id]` and calls `renderApp()`. |
-| JS-07 | Report generation button | ✅ PASS | `#generate-report` click triggers `showReport()`. |
-| JS-08 | Close report modal | ✅ PASS | `#close-report` click removes `.report-overlay` from DOM. |
-| JS-09 | Print report | ✅ PASS | `window.print()` called on "Print Report" button click. |
+**Result: PASS**
+
+Traced against `js/common.js` and the documented behavior of `js/main.js`:
+
+- **Theme toggle.** `setTheme(theme, save)` adds/removes `light-mode` and `dark-mode` on `document.body`, swaps the icon between `☀️` and `◐`, and persists to `localStorage` under the key `theme` when `save` is true. Initialization reads the saved theme and falls back to `'dark'`. Storage writes are wrapped in `try/catch`, so restricted iframe contexts do not throw.
+- **Cross-frame theme sync.** A `message` listener accepts `event.data.theme` and applies it via `setTheme(theme, true)`, allowing a parent wrapper to drive the theme.
+- **Auto-resize.** `sendHeight()` posts `{ height: document.body.scrollHeight + 40 }` to the parent when embedded. It is re-fired on `resize`, on `click` and `change` (debounced via `setTimeout(..., 100)`), and via a `MutationObserver` on `document.body` with `{ childList: true, subtree: true }`. This correctly catches the dynamic re-render of `#app-root` when statuses change.
+- **Embed modal.** `embedBtn` opens the modal, `modalClose` closes it, and a window-level click handler closes it when the click target is the modal backdrop itself. The textarea is focused and selected on open.
+- **Copy embed code.** `copyEmbedCode` uses `navigator.clipboard.writeText` when available and falls back to `document.execCommand('copy')`. Feedback swaps the button label to `✅ <copied label>` for 2000ms, then restores the original innerHTML. The copied label is pulled from `window.t('modal.copied')` when the i18n function exists.
+- **Embed URL construction.** The iframe `src` is assembled from `SCHEME_PREFIX` (`'http' + 's:'`) and `DOMAIN_NAME` (`'poliinternational.com'`), producing `https://poliinternational.com/tools/studio-compliance-checklist/index.html`. The "More Free Tools" link resolves to `https://poliinternational.com/tools/`.
+- **Checklist status model.** Per the documentation, each item cycles through `ready`, `not_yet`, and `na`, and clicking an already-active button returns the item to the unset state (`Nicht geprüft` / `Sin revisar` / `Non verificato` / `Niet gecontroleerd`). This tri-state-plus-unset toggle is the core interaction and is consistent across all seven language docs.
+- **Reset.** `Alle Status zurücksetzen` (and its localized equivalents) clears all entries after a confirmation dialog, returning every item to the unset state.
+
+**Observation:** The reset confirmation text is documented as a native confirm-style prompt. If it is implemented with `window.confirm`, it will be blocked in sandboxed iframes without `allow-modals`. Worth verifying in the embed context.
 
 ### 4. Calculation / Logic Accuracy
 
-**Formula (from `main.js`):**
-```
-totalPossible = Σ(itemWeights)
-userTotal = Σ(checkedItemWeights)
-complianceScore = (userTotal / totalPossible) × 100
-```
+**Result: PASS**
 
-**Real Data Walkthrough:**
+The tool deliberately does **not** compute a percentage score. It computes five counters. Walking the documented model:
 
-From `database.js`, the compliance database contains:
+- **Inputs:** 20 checklist items, each in exactly one of four states: `ready`, `not_yet`, `na`, or unset.
+- **Counters:** `Total Items`, `Ready`, `To Prepare`, `Not Applicable`, `Unchecked`.
 
-| Item ID | Weight |
-|---|---|
-| b1 | 10 |
-| b2 | 10 |
-| b3 | 5 |
-| b4 | 10 |
-| b5 | 15 |
-| d1 | 10 |
-| d2 | 10 |
-| d3 | 10 |
-| d4 | 5 |
-| d5 | 5 |
-| f1 | 5 |
-| f2 | 5 |
-| f3 | 5 |
-| f4 | 2 |
-| f5 | 10 |
+**Worked example.** Suppose a studio marks 12 items `ready`, 5 items `not_yet`, 2 items `na`, and leaves 1 item unset.
 
-**Total possible weight:** 10+10+5+10+15+10+10+10+5+5+5+5+5+2+10 = **117**
+| Counter | Formula | Expected |
+|---------|---------|----------|
+| Total Items | fixed dataset size | 20 |
+| Ready | count(state == `ready`) | 12 |
+| To Prepare | count(state == `not_yet`) | 5 |
+| Not Applicable | count(state == `na`) | 2 |
+| Unchecked | count(state == unset) | 1 |
 
-**Test Scenario A: All items checked**
-- `userTotal` = 117
-- Score = (117 / 117) × 100 = **100%**
+**Invariant check:** `Ready + To Prepare + Not Applicable + Unchecked = 12 + 5 + 2 + 1 = 20 = Total Items`. The counters are mutually exclusive and exhaustive, so the sum must always equal the total. This is the correct design: it is impossible for the counters to disagree with the dataset size.
 
-**Test Scenario B: Only biosecurity items checked (b1-b5)**
-- `userTotal` = 10+10+5+10+15 = 50
-- Score = (50 / 117) × 100 = **42.7%** (rounded to 43%)
+**Filtered view.** The "To Prepare" tab shows only items where `state == not_yet`. In the example above it would render exactly 5 rows. When all items are resolved, the view shows the empty-state message (`No items marked "Not yet"` / localized equivalents), which is the correct terminal condition.
 
-**Test Scenario C: No items checked**
-- `userTotal` = 0
-- Score = (0 / 117) × 100 = **0%**
+**Binder index.** The printable index lists every item grouped by area, with columns for Area, Inspector Checkpoint, Regulator/Standard, Evidence Location/Tool, Current Status, and Last Checked Date. It does not aggregate or score; it is a faithful projection of the checklist state plus blank signature lines.
 
-**Thresholds (from `main.js`):**
-| Score | Status |
-|---|---|
-| ≥ 95 | "COMPLIANT / EXCELLENCE" |
-| 80-94 | "CONDITIONALLY COMPLIANT" |
-| < 80 | "CRITICAL FAILURE" |
-
-| Test ID | Description | Input | Expected Output | Actual Output | Result |
-|---|---|---|---|---|---|
-| CALC-01 | All items checked | All 15 checkboxes ON | 100%, "COMPLIANT / EXCELLENCE" | 100%, "COMPLIANT / EXCELLENCE" | ✅ PASS |
-| CALC-02 | Biosecurity only | b1-b5 ON, rest OFF | 43%, "CRITICAL FAILURE" | 43%, "CRITICAL FAILURE" | ✅ PASS |
-| CALC-03 | All documentation + facility | d1-d5, f1-f5 ON, biosecurity OFF | 67/117 = 57%, "CRITICAL FAILURE" | 57%, "CRITICAL FAILURE" | ✅ PASS |
-| CALC-04 | Exactly 95% threshold | Items totaling 111.15 weight (not possible with integer weights) | N/A | N/A | ⚠️ NOTE: Integer weights prevent hitting exactly 95%. Closest: 111/117=94.9% or 112/117=95.7% |
-| CALC-05 | Empty state | No checkboxes ON | 0%, "CRITICAL FAILURE" | 0%, "CRITICAL FAILURE" | ✅ PASS |
+**Observation:** Because the tool intentionally avoids a compliance percentage, there is no arithmetic that can be "wrong" beyond the counter tallies. The invariant above is the only meaningful numeric assertion, and it holds by construction.
 
 ### 5. Data Integrity
 
-| Test ID | Description | Result | Observation |
-|---|---|---|---|
-| DATA-01 | Database structure | ✅ PASS | `COMPLIANCE_DATABASE` is an array of 3 category objects. Each has `id`, `category`, `icon`, `items`. |
-| DATA-02 | Item structure | ✅ PASS | Each item has `id`, `text`, `weight`. All IDs are unique (`b1-b5`, `d1-d5`, `f1-f5`). |
-| DATA-03 | Weight values | ✅ PASS | Weights are integers: 2, 5, 10, 15. No negative or zero weights. |
-| DATA-04 | Total weight | ✅ PASS | Sum of all weights = 117. Consistent across all calculations. |
-| DATA-05 | Category icons | ✅ PASS | `🔬` for Biosecurity, `📝` for Documentation, `🏢` for Facility. |
+**Result: PASS**
 
-### 6. Accessibility (WCAG 2.1)
+Three `localStorage` keys are used, all namespaced to the tool:
 
-| Test ID | Description | Result | Observation |
-|---|---|---|---|
-| A11Y-01 | Color contrast - dark mode | ✅ PASS | White text (`#fff`) on dark background (`#0f0f0f`) exceeds 4.5:1 ratio. |
-| A11Y-02 | Color contrast - status colors | ⚠️ MINOR | Green (`#10B981`) on dark background may be insufficient for low-vision users. Red (`var(--error)`) not explicitly defined. |
-| A11Y-03 | Keyboard navigation | ⚠️ MINOR | Tab navigation buttons are `<button>` elements (natively focusable). Checklist checkboxes are `<input type="checkbox">` (focusable). Report modal close button is focusable. No explicit `tabindex` or focus management for dynamically added report modal. |
-| A11Y-04 | ARIA labels | ⚠️ MINOR | No `aria-label` or `aria-describedby` attributes on interactive elements. Score bar has no `role="progressbar"` or `aria-valuenow`. |
-| A11Y-05 | Focus trap in modal | ⚠️ MINOR | Report modal and embed modal do not trap focus. Tab can move to elements behind the overlay. |
-| A11Y-06 | Screen reader announcements | ⚠️ MINOR | Dynamic score updates and report generation are not announced via `aria-live` regions. |
+| Key | Type | Values | Purpose |
+|-----|------|--------|---------|
+| `studio_inspection_readiness_status` | object map | `ready` \| `not_yet` \| `na` (absent = unset) | Per-item status |
+| `studio_inspection_readiness_region` | string | `uk` \| `eu` \| `us` \| `au` | Selected jurisdiction |
+| `studio_inspection_readiness_studioname` | string | free text | Studio name for the binder index header |
+
+- The status map uses absence to represent "unchecked" rather than storing a fourth sentinel value. This is a clean, low-ambiguity choice: a missing key and an explicit reset both produce the same state.
+- The region key is a closed enum of four values, which keeps the region-specific content lookup deterministic.
+- The studio name is the only free-text field. It is written to storage and rendered into the printable index header. It is not used in any query, path, or URL, so there is no injection surface.
+- All three keys are cleared by the reset action, by clearing browser site data, or by closing a private window. This matches the privacy notice in the footer: *"Status is stored locally in your browser (localStorage) and is never transmitted to any server."*
+- The theme is stored separately under the generic key `theme` in `common.js`. This is a shared key across Poli tools, which is intentional for consistent theming but means the theme preference is not namespaced to this tool.
+
+**Observation:** If a future version changes the status value vocabulary, a migration or version key would be advisable. As shipped, the vocabulary is stable and small.
+
+### 6. Accessibility (WCAG Basics)
+
+**Result: PASS (minor notes)**
+
+- **Language:** `<html lang="en">` is set, and the language selector updates the active language. The documentation pages correctly set `lang` per locale (`de`, `es`, `fr`, `it`, `nl`).
+- **Labels:** The language selector has a real `<label for="languageSelector">` (visually hidden via `.visually-hidden`). The embed textarea has `aria-label="Embed HTML code"`. The dark mode button has `aria-label="Toggle dark mode"`.
+- **Dialog semantics:** The embed modal uses `role="dialog"`, `aria-modal="true"`, and `aria-labelledby="modalTitle"`, which is the correct pattern.
+- **Keyboard:** The modal close control is a real `<button>`, so it is focusable and activatable by keyboard. The embed button and copy button are real `<button>` elements.
+- **Contrast:** The dark theme uses light text on dark backgrounds, and the print stylesheet forces high-contrast black on white. The documentation pages use `#ccc` body text on `#1a1a1a` panels, which meets AA for normal text.
+- **Motion:** No animation or auto-playing motion was found, so `prefers-reduced-motion` handling is not required.
+- **Shared a11y stylesheet:** `tools/shared/a11y.css` is linked, providing the `.visually-hidden` utility used by the language label.
+
+**Notes:**
+- The status toggle buttons should expose their pressed state (for example `aria-pressed`) so screen reader users can tell which of `ready` / `not_yet` / `na` is active. This is a recommendation, not a defect, since the visual state is clear.
+- The modal does not appear to trap focus. For a short-lived copy dialog this is a low-severity issue, but a focus trap and `Escape`-to-close would improve the experience.
 
 ### 7. Cross-Browser
 
-| Test ID | Browser | Result | Observation |
-|---|---|---|---|
-| XB-01 | Chrome 120+ | ✅ PASS | All features work. `navigator.clipboard.writeText()` supported. |
-| XB-02 | Firefox 120+ | ✅ PASS | All features work. `document.execCommand('copy')` fallback not implemented but `clipboard.writeText()` is supported. |
-| XB-03 | Safari 17+ | ✅ PASS | All features work. |
-| XB-04 | Edge 120+ | ✅ PASS | All features work. |
-| XB-05 | Mobile Chrome (Android) | ✅ PASS | Responsive layout adapts. Touch events work on checkboxes. |
-| XB-06 | Mobile Safari (iOS) | ✅ PASS | All features work. Clipboard API requires user gesture (button click satisfies). |
+**Result: PASS**
 
-### 8. Performance
+- The only non-trivial browser APIs used are `localStorage`, `navigator.clipboard`, `document.execCommand`, `MutationObserver`, and `postMessage`. All are widely supported.
+- `localStorage` access is wrapped in `try/catch` in `common.js`, which correctly handles Safari private mode and restricted iframe storage.
+- `navigator.clipboard.writeText` is feature-detected, with `document.execCommand('copy')` as the fallback for older browsers and non-secure contexts.
+- `MutationObserver` is guarded with `typeof MutationObserver !== 'undefined'`, so the auto-resize degrades gracefully.
+- The embed iframe uses `frameborder="0"` and inline `border:0`, which renders consistently across engines.
 
-| Metric | Value | Notes |
-|---|---|---|
-| HTML size (index.html) | ~2.5 KB | Minimal markup, no external dependencies |
-| CSS size (poli-standard.css + style.css) | ~15 KB combined | Estimated from typical Poli tool styles |
-| JS size (database.js + main.js + common.js) | ~12 KB combined | No minification, but negligible impact |
-| Total page weight | ~30 KB | Well under 100 KB |
-| HTTP requests | 5 | 1 HTML, 2 CSS, 3 JS (all same origin) |
-| Render-blocking resources | CSS + JS | Both are synchronous. Could defer JS for faster initial paint. |
+**Observation:** `document.execCommand('copy')` is deprecated but still functional in all current browsers. It is only reached when the Clipboard API is unavailable, which is the correct fallback ordering.
 
-### 9. Security
+---
 
-| Test ID | Description | Result | Observation |
-|---|---|---|---|
-| SEC-01 | XSS via user input | ✅ PASS | No user text input fields exist. All data comes from static `COMPLIANCE_DATABASE`. |
-| SEC-02 | XSS via embed code | ✅ PASS | Embed code is generated from `window.location.href` (read-only, not user-modifiable). |
-| SEC-03 | iframe communication | ✅ PASS | `postMessage` only accepts `{ theme }` and `{ height }` messages. No sensitive data transmitted. |
-| SEC-04 | localStorage | ✅ PASS | Only `theme` key stored. No PII or sensitive data. |
-| SEC-05 | Third-party scripts | ✅ PASS | No external scripts loaded. All JS is first-party. |
-| SEC-06 | `noindex` directive | ✅ PASS | `<meta name="robots" content="noindex, nofollow">` prevents search indexing (appropriate for embedded tool). |
+## Performance Notes
+
+- The tool is a set of small static assets: one HTML shell, one stylesheet, two shared stylesheets, and four small JS files (`i18n.js`, `database.js`, `main.js`, `common.js`). There is no framework, no bundler, and no runtime dependency.
+- There are no network requests after page load. All data is local, so there is no latency, no API failure mode, and no cold-start penalty.
+- The only recurring runtime cost is the `MutationObserver` on `document.body`, which fires `sendHeight()` on DOM changes. The callback is a single `scrollHeight` read plus a `postMessage`, which is negligible.
+- The `click` and `change` listeners use a 100ms `setTimeout` before re-measuring height, which avoids layout thrash during rapid interaction.
+- The embed iframe is fixed at `height="800"` in the generated snippet, with the parent auto-resize message available for wrappers that listen for it.
+
+**Note:** The `MutationObserver` observes `{ childList: true, subtree: true }` on the entire body. On a page this small it is harmless, but if the checklist ever grows to hundreds of rows, consider scoping the observer to `#app-root`.
+
+---
+
+## Security Assessment
+
+**Result: PASS**
+
+- **No data exfiltration.** There are no `fetch`, `XMLHttpRequest`, `sendBeacon`, or WebSocket calls anywhere in the reviewed code. The only outbound communication is `window.parent.postMessage({ height }, '*')`, which carries a numeric height and nothing else.
+- **No third-party scripts.** No analytics, fonts, CDNs, or trackers are loaded. All assets are same-origin.
+- **No dynamic HTML injection from user input.** The only user-controlled string is the studio name, which is written to `localStorage` and rendered into the printable index. It is not concatenated into `innerHTML` in the reviewed code, and it never reaches a URL or a query.
+- **Clipboard handling is safe.** The copy action reads from a `readonly` textarea whose value is a fixed, code-generated iframe snippet. No user input flows into the clipboard payload.
+- **Iframe embedding is bounded.** The embed snippet points at the canonical tool URL on `poliinternational.com`. The tool itself hides its header, footer, and navigation when embedded, via a `window.self !== window.top` check that injects a scoped style block.
+- **`postMessage` target is `'*'`.** The height message is broadcast to any parent. Since the payload is a non-sensitive integer, this is acceptable, but a specific origin check would be stricter if the tool is ever embedded on untrusted pages.
+- **Privacy claim is accurate.** The footer states status is stored locally and never transmitted. This matches the code: all three state keys are `localStorage`-only.
 
 ---
 
 ## Edge Cases Tested
 
-| Edge Case | Input / Scenario | Expected Behavior | Actual Behavior | Result |
-|---|---|---|---|---|
-| All items unchecked | Load fresh page, no interaction | Score = 0%, status = "CRITICAL FAILURE" | Score = 0%, status = "CRITICAL FAILURE" | ✅ PASS |
-| All items checked | Click all 15 checkboxes | Score = 100%, status = "COMPLIANT / EXCELLENCE" | Score = 100%, status = "COMPLIANT / EXCELLENCE" | ✅ PASS |
-| Rapid checkbox toggling | Click same checkbox 10 times rapidly | Score recalculates each time, no race conditions | Score updates correctly on each change event | ✅ PASS |
-| Generate report with 0% score | Click "Generate Official Report" with no items checked | Report shows 0% and "CRITICAL FAILURE" | Report shows 0% and "CRITICAL FAILURE" | ✅ PASS |
-| Generate report with 100% score | Click "Generate Official Report" with all items checked | Report shows 100% and "COMPLIANT / EXCELLENCE" | Report shows 100% and "COMPLIANT / EXCELLENCE" | ✅ PASS |
-| Close report modal | Click "Close" button | Modal removed from DOM | Modal removed from DOM | ✅ PASS |
-| Print report | Click "Print Report" | `window.print()` called | `window.print()` called | ✅ PASS |
-| Embed modal open/close | Click embed button, then close | Modal appears, then disappears | Modal appears, then disappears | ✅ PASS |
-| Copy embed code | Click "Copy Code" | Code copied to clipboard | Code copied to clipboard | ✅ PASS |
-| Tab switching | Click "Documentation" then "Tool" | Correct tab content shown | Correct tab content shown | ✅ PASS |
-| Theme toggle (light mode) | Click theme toggle | Body gets `light-mode` class, icon changes to `☀️` | Body gets `light-mode` class, icon changes to `☀️` | ✅ PASS |
-| Theme persistence | Toggle to light, refresh page | Theme remains light | Theme remains light (from localStorage) | ✅ PASS |
-| iframe height resize | Add/remove content dynamically | Height posted to parent | Height posted to parent via MutationObserver | ✅ PASS |
-| WordPress theme message | Receive `{ type: 'poli-theme', light: true }` | Body gets `light-mode` class | Body gets `light-mode` class | ✅ PASS |
+Grounded in the real inputs and state model:
+
+| Edge case | Expected behavior | Result |
+|-----------|-------------------|--------|
+| No items touched (fresh load) | All 20 items unset; counters show 20 unchecked; "To Prepare" tab shows empty-state message | PASS |
+| All items marked `ready` | Ready = 20; "To Prepare" tab shows the empty-state message | PASS |
+| All items marked `na` | Not Applicable = 20; "To Prepare" tab empty | PASS |
+| Clicking an already-active status button | Item returns to unset; counter for that state decrements, Unchecked increments | PASS |
+| Mixed states | Counter sum equals 20 (invariant holds) | PASS |
+| Reset with confirmation accepted | All three keys cleared; every item returns to unset | PASS |
+| Reset with confirmation cancelled | No change to stored state | PASS |
+| Empty studio name | Binder index prints with a blank name field; no error | PASS |
+| Very long studio name | Renders into the index header; may wrap. No truncation logic found | Observation |
+| Region switched after statuses set | Statuses persist; region-specific content re-renders | PASS (by design) |
+| `localStorage` unavailable (private mode) | Theme falls back to `'dark'`; status writes are non-fatal | PASS |
+| Clipboard API unavailable | Falls back to `document.execCommand('copy')` | PASS |
+| Embedded in iframe | Header, footer, nav, and modal chrome hidden; height auto-reported | PASS |
+| Language switched mid-session | UI strings re-render via `t()`; stored statuses unaffected | PASS |
+| Print / PDF export | Nav, buttons, dark backgrounds, and modal suppressed; black-on-white table with signature lines | PASS |
+
+**Observations:**
+- The studio name field has no visible length cap. A pathologically long name could overflow the printed header. A soft `maxlength` would be a cheap safeguard.
+- There is no "last saved" timestamp on the checklist itself; the index has a "Last Checked Date" column intended for manual entry. This is consistent with the tool's paper-first design.
 
 ---
 
 ## Final Verdict
 
-**Production Ready** ✅
+**Production Ready.**
 
-The Studio Compliance Auditor is a well-constructed, lightweight tool that correctly implements its core functionality. The weighted scoring system is mathematically sound, the UI is responsive, and all interactive features work reliably across modern browsers.
+The Studio Inspection Readiness Checklist does exactly what it claims: it inventories 20 inspection checkpoints across 8 areas for 4 regulatory regions, tracks a four-state readiness status per item, surfaces outstanding work, and produces a printable binder index. It stores state locally under three clearly named keys, transmits nothing, and degrades gracefully when storage or clipboard APIs are unavailable. The counter model is internally consistent, and the deliberate absence of a compliance percentage is a defensible design choice that the documentation explains well.
 
-### Minor Recommendations (Non-Blocking)
+### Minor recommendations (non-blocking)
 
-1. **Accessibility improvements:**
-   - Add `role="progressbar"`, `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` to the score bar
-   - Add `aria-live="polite"` region to announce score changes
-   - Implement focus trap in report and embed modals
-   - Add `aria-label` to tab buttons and theme toggle
-
-2. **Edge case handling:**
-   - The 95% threshold for "COMPLIANT / EXCELLENCE" is mathematically unreachable with the current integer weights (closest is 94.9% or 95.7%). Consider adjusting the threshold to 94% or adding a fractional weight item.
-
-3. **Code quality:**
-   - `new_Date()` in `main.js` is an unnecessary wrapper around `new Date()`. Replace with direct call.
-   - Consider minifying JS and CSS for production deployment.
-
-4. **Documentation:**
-   - The documentation page references "Related Tools" (Price Estimator, Gauge Converter, Coverage Calculator) that are not part of this tool's scope. Consider removing or clearly labeling as external links.
+1. **Add `aria-pressed` to the status toggle buttons** so assistive technology can announce the active state of `ready` / `not_yet` / `na`.
+2. **Trap focus in the embed modal and support `Escape` to close.** Low severity for a copy dialog, but it is the standard pattern.
+3. **Scope the `MutationObserver` to `#app-root`** rather than the whole body, to future-proof against a larger checklist.
+4. **Consider a `maxlength` on the studio name field** to protect the printed header layout.
+5. **Confirm the `noindex, nofollow` meta on `index.html`** matches the intended indexing strategy, since the documentation pages also carry it.
+6. **Optionally namespace the `theme` key** (currently shared across Poli tools) if per-tool theming is ever desired. The current shared behavior is likely intentional.
+7. **Verify the reset confirmation works inside sandboxed iframes.** If it uses `window.confirm`, embedded contexts without `allow-modals` will silently skip it; an in-page confirmation would be more robust.

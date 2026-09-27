@@ -1,320 +1,397 @@
-# Studio Compliance Auditor - Complete Guide
+# Studio Inspection Readiness Checklist - Complete Guide
 
 ## Target Keywords
 
-### Primary Keyword
-- tattoo studio compliance checklist
+**Primary keyword:** studio inspection readiness checklist
 
-### Long-Tail Keywords
-1. body art studio health inspection checklist
-2. piercing studio infection control audit
-3. tattoo shop legal compliance requirements
-4. studio biosecurity self-assessment tool
-5. tattoo facility standards checklist
-6. piercing studio OSHA compliance guide
-7. tattoo studio spore testing documentation
-8. body art studio consent form requirements
-9. tattoo shop sterilization log template
-10. piercing studio bloodborne pathogen certification
-11. studio compliance score calculator
-12. tattoo studio health department preparation
-13. body art facility audit report generator
-14. tattoo shop non-porous surfaces requirements
-15. piercing studio sharps disposal compliance
+**Long-tail keywords:**
 
-## Meta Title & Description
+1. health inspection checklist for tattoo studio
+2. body piercing studio compliance checklist
+3. tattoo studio inspection preparation UK
+4. EU body art regulations inspection requirements
+5. US tattoo studio health department inspection checklist
+6. Australian tattoo and piercing studio inspection requirements
+7. inspection binder index for tattoo studio
+8. where to keep evidence for studio health inspection
+9. studio audit checklist for tattoo and piercing
+10. body art regulations compliance tracker
+11. tattoo studio hygiene inspection evidence locations
+12. piercing studio inspection readiness by region
+13. free studio compliance checklist for tattoo artists
+14. how to prepare for a health inspector visit tattoo shop
+15. studio inspection checklist with regulator references
 
-```markdown
-Meta Title (60 chars):
-Studio Compliance Auditor | Tattoo & Piercing Studio Checklist
+---
 
-Meta Description (155 chars):
-Free tool to audit your tattoo or piercing studio against health, safety, and legal standards. Generate compliance reports with real-time scoring.
+## Meta Title
+
+```
+Studio Inspection Readiness Checklist | Tattoo & Piercing
 ```
 
-## Content Outline
+## Meta Description
 
-### H1: Studio Compliance Auditor - Complete Guide to Tattoo & Piercing Studio Compliance
+```
+Prepare for a health inspection: 20 checks across 8 areas, evidence locations, regulator references and a printable binder index. UK, EU, US, AU.
+```
 
-#### H2: What is Studio Compliance Auditor?
-- **H3:** Definition and Purpose
-  - A free web-based self-assessment tool that audits tattoo and piercing studios against health, safety, and legal compliance standards
-  - Generates weighted compliance scores and official audit reports
-  - Built on a database of 15 compliance items across 3 categories
+---
 
-- **H3:** Core Functionality
-  - Interactive checklist with 15 compliance items
-  - Real-time compliance score calculation using weighted values
-  - Report generation with status classification (COMPLIANT / EXCELLENCE, CONDITIONALLY COMPLIANT, CRITICAL FAILURE)
-  - Print-ready official audit reports
+## H1
 
-#### H2: Who Should Use This Tool
-- **H3:** Studio Owners
-  - Prepare for health department inspections
-  - Standardize compliance across multiple locations
-  - Identify gaps in infection control protocols
+# Studio Inspection Readiness Checklist: Prepare Your Tattoo or Piercing Studio for a Health Inspection
 
-- **H3:** Studio Managers
-  - Conduct regular internal audits
-  - Track staff compliance with documentation requirements
-  - Generate reports for insurance purposes
+---
 
-- **H3:** Tattoo Artists & Piercers
-  - Verify personal workspace meets standards
-  - Understand compliance requirements for independent practice
-  - Prepare for studio ownership transition
+## Content Outline (H2 / H3)
 
-- **H3:** Health Inspectors & Regulators
-  - Reference standard compliance criteria
-  - Educate studio owners on requirements
-  - Use as preliminary screening tool
+- **What is the Studio Inspection Readiness Checklist?**
+  - The eight inspection areas covered
+  - What the tool tracks instead of a compliance score
+- **Who Should Use This Checklist**
+  - Tattoo artists and piercers
+  - Studio owners and hygiene leads
+  - Apprentices and new staff
+- **How to Use the Checklist**
+  - Step 1: Select your jurisdiction or region
+  - Step 2: Work through the Inspection Checklist tab
+  - Step 3: Set a preparation status for each item
+  - Step 4: Open linked Poli evidence tools where shown
+  - Step 5: Watch the five counters
+  - Step 6: Review the Items to Prepare tab
+  - Step 7: Generate and print the Inspection Binder Index
+  - Step 8: Reset all statuses when you need a clean slate
+  - Step 9: Adjust the view and embed the tool
+- **What the Tool Does Not Do**
+- **Where Your Data Is Stored**
+- **Printing and Exporting the Binder Index**
+- **Use-Case Examples**
+  - Example 1: A UK studio preparing for an unannounced visit
+  - Example 2: A US studio using single-use sterile equipment only
+  - Example 3: An EU studio building a physical inspection binder
+- **Frequently Asked Questions (FAQ)**
+- **Structured Data**
+- **Internal Linking Suggestions**
 
-#### H2: How to Use the Studio Compliance Auditor
+---
 
-- **H3:** Step 1: Start a New Audit
-  - Click "Start New Audit" button on the tool interface
-  - Tool initializes with "Initializing Compliance Database..." message
-  - Wait for the compliance database to load
+## What is the Studio Inspection Readiness Checklist?
 
-- **H3:** Step 2: Complete Biosecurity & Infection Control Section
-  - Check items for:
-    - Designated hand-washing station in procedure area (weight: 10)
-    - EPA-registered hospital-grade disinfectants (weight: 10)
-    - Single-use sterile gloves for every procedure (weight: 5)
-    - Sharps container within arm's reach (weight: 10)
-    - Validated autoclave cycle for reusable tools (weight: 15)
+The Studio Inspection Readiness Checklist is a free browser-based tool that structures your studio's preparation for an official health and safety inspection. It organises **twenty essential hygiene and safety requirements across eight work areas**:
 
-- **H3:** Step 3: Complete Documentation & Legal Section
-  - Check items for:
-    - Signed informed consent forms archived (weight: 10)
-    - Sterilization logs maintained (weight: 10)
-    - Weekly spore test results archived (weight: 10)
-    - Bloodborne pathogen certificates on file (weight: 5)
-    - Ink and jewelry batch certifications accessible (weight: 5)
+1. Hand hygiene and personal protective equipment
+2. Surfaces and chemical wipe disinfection
+3. Sterilisation and instrument reprocessing
+4. Sharps containers and clinical waste disposal
+5. Staff training and occupational health
+6. Consent records and document archiving
+7. Premises layout and functional zone separation
+8. Working materials, tattoo inks and initial piercing jewellery
 
-- **H3:** Step 4: Complete Facility Standards Section
-  - Check items for:
-    - Procedure area separated from waiting area (weight: 5)
-    - Non-porous, easy-to-clean floors and walls (weight: 5)
-    - Studio free of animals except service animals (weight: 5)
-    - Adequate lighting in procedure area (weight: 2)
-    - Sterilization room separate from procedure area (weight: 10)
+Rather than issuing a fictional percentage score with no legal weight, the tool records the **actual preparation status of each item**, documents **where the supporting evidence is kept**, highlights **outstanding tasks**, and generates a **cover sheet index for your physical inspection binder**.
 
-- **H3:** Step 5: Review Your Compliance Score
-  - View real-time percentage score in the score header
-  - Score bar fills dynamically as items are checked
-  - Score updates instantly with each checkbox change
+The tool adapts its requirements and regulator references to four regions: the **United Kingdom, the European Union, the United States, and Australia**. It is available in seven languages: English, German, Spanish, French, Italian, Portuguese, and Dutch.
 
-- **H3:** Step 6: Generate Official Report
-  - Click "Generate Official Report" button
-  - View report with:
-    - Final compliance percentage
-    - Status classification with color coding
-    - Audit generation date
-  - Print report using the print button
-  - Close report modal when finished
+A key design principle is stated directly in the interface: *"This tool tracks preparation and evidence locations. It does not calculate a score and does not certify compliance."*
 
-#### H2: Compliance Thresholds & Scoring
+---
 
-- **H3:** Score Ranges and Ratings
-  - **95%+**: COMPLIANT / EXCELLENCE (Green)
-  - **80-94%**: CONDITIONALLY COMPLIANT (Yellow)
-  - **Below 80%**: CRITICAL FAILURE (Red)
+## Who Should Use This Checklist
 
-- **H3:** Weight Distribution
-  - **Critical Items (weight 15)**: Validated autoclave cycle
-  - **Major Items (weight 10)**: Hand-washing station, disinfectants, sharps container, consent forms, sterilization logs, spore tests, separate sterilization room
-  - **Standard Items (weight 5)**: Sterile gloves, BBP certificates, batch certifications, separated procedure area, non-porous surfaces, no animals
-  - **Minor Items (weight 2)**: Adequate lighting
+- **Tattoo artists and piercers** working in independent studios or shared workspaces, who need to know what an inspector will ask to see.
+- **Studio owners and hygiene leads** preparing for scheduled inspections or unannounced visits, who need a single place to track readiness and evidence locations.
+- **Apprentices and new staff** learning hygiene protocols and record-keeping duties, who benefit from a structured list of what matters and where documents live.
 
-- **H3:** Scoring Formula
-  - `totalPossible = sum of all item weights (117)`
-  - `userTotal = sum of checked item weights`
-  - `complianceScore = (userTotal / totalPossible) × 100`
+The tool is relevant to anyone operating under UK, EU, US, or Australian body art regulations. Studios outside those regions should follow their local licensing authority's requirements.
 
-#### H2: Realistic Use Cases
+---
 
-- **H3:** Use Case 1: New Studio Owner Preparing for First Inspection
-  - **Scenario**: Maria opens a new tattoo studio and wants to ensure she passes her first health department inspection
-  - **Tool Usage**: Runs the audit and scores 65% (CRITICAL FAILURE)
-  - **Identified Gaps**: Missing spore test logs, no separate sterilization room, inadequate lighting
-  - **Action Taken**: Installs proper lighting, designates sterilization area, implements weekly spore testing
-  - **Result**: Re-audits and scores 92% (CONDITIONALLY COMPLIANT)
+## How to Use the Checklist
 
-- **H3:** Use Case 2: Established Studio Annual Internal Audit
-  - **Scenario**: "Ink & Steel" studio conducts quarterly internal audits
-  - **Tool Usage**: Manager runs audit, scores 88% (CONDITIONALLY COMPLIANT)
-  - **Issues Found**: Consent forms not properly archived for clients from 2 years ago, one artist's BBP certification expired
-  - **Action Taken**: Digitizes consent form archive, schedules BBP training for all staff
-  - **Result**: Next audit scores 97% (COMPLIANT / EXCELLENCE)
+### Step 1: Select your jurisdiction or region
 
-- **H3:** Use Case 3: Piercing Studio Preparing for Relocation
-  - **Scenario**: "Pierce Perfect" is moving to a new location and needs to ensure the new facility meets standards
-  - **Tool Usage**: Owner runs audit on planned layout, scores 78% (CRITICAL FAILURE)
-  - **Issues Found**: Planned procedure area not separated from waiting room, sterilization room adjacent but not separate
-  - **Action Taken**: Redesigns floor plan to include physical separation, adds wall between sterilization and procedure areas
-  - **Result**: Final audit scores 100% (COMPLIANT / EXCELLENCE)
+1. Find the selector labelled **"Select Jurisdiction / Region:"**.
+2. Choose your region: **United Kingdom**, **European Union**, **United States**, or **Australia**.
+3. Read the explanatory note summarising the inspecting authorities and standards that apply to that area.
 
-#### H2: Frequently Asked Questions (FAQ)
+### Step 2: Work through the Inspection Checklist tab
 
-**Q1: What compliance standards does this tool check?**
-A: The tool checks against industry-standard biosecurity, legal documentation, and facility requirements for tattoo and piercing studios. It covers 15 specific items across three categories with weighted scoring.
+1. Open the **Inspection Checklist** tab to see all inspection items.
+2. Review the reference under **"Regulatory body / standard:"** and the storage recommendation under **"Where the evidence is kept:"**.
 
-**Q2: Is this tool an official health department inspection?**
-A: No. This is a self-assessment tool for internal use. Always consult with local health authorities for official compliance verification.
+### Step 3: Set a preparation status for each item
 
-**Q3: How is the compliance score calculated?**
-A: Each item has a weight (2, 5, 10, or 15). The total possible score is 117. Your score is (checked items' total weight / 117) × 100.
+1. In the control area labelled **"Preparation status:"**, click **Ready**, **Not yet**, or **Not applicable**.
+2. Clicking an already-active button resets that item to **Unchecked**.
 
-**Q4: What does "CRITICAL FAILURE" mean?**
-A: A score below 80% indicates significant compliance gaps that require immediate attention before a health inspection.
+### Step 4: Open linked Poli evidence tools where shown
 
-**Q5: Can I save my audit results?**
-A: The tool does not save data between sessions. Use the print report function to save your results.
+1. Look for items that display the **"Open Poli Evidence Tool"** button.
+2. Click it to launch the matching specialist tool in a new window.
+3. Complete your logging, file the records, and set the checklist item to **Ready**.
 
-**Q6: What is a spore test and why is it weighted at 10?**
-A: A spore test (biological indicator) validates that your autoclave is actually killing microorganisms. It's weighted heavily because it's a critical safety verification.
+### Step 5: Watch the five counters
 
-**Q7: Do I need a separate room for sterilization?**
-A: Yes, the tool checks for a sterilization room separate from the procedure area (weight: 10). This is a standard requirement in most jurisdictions.
+1. Keep an eye on the counter bar above the tabs.
+2. Monitor the five counters: **Total Items**, **Ready**, **Still to Prepare**, **Not Applicable**, and **Unchecked**.
+3. Note the reminder: *"This tool tracks preparation and evidence locations. It does not calculate a score and does not certify compliance."*
 
-**Q8: What counts as "EPA-registered hospital-grade disinfectant"?**
-A: Products registered with the EPA specifically for hospital use, with claims against bloodborne pathogens and tuberculosis. Alcohol is not sufficient.
+### Step 6: Review the Items to Prepare tab
 
-**Q9: How often should I run this audit?**
-A: Monthly internal audits are recommended, with quarterly formal audits using this tool.
+1. Open the **Items to Prepare** tab to show only open actions.
+2. Work through the physical or administrative items in order.
+3. Mark completed tasks as **Ready** until the message **"No items currently marked as 'Not yet'"** appears.
 
-**Q10: Can I use this for a piercing-only studio?**
-A: Yes. The tool covers standards applicable to both tattoo and piercing studios, including sharps disposal, sterilization, and facility requirements.
+### Step 7: Generate and print the Inspection Binder Index
+
+1. Switch to the **Inspection Binder Index** tab, or use the **Print Inspection Binder Index** button.
+2. Enter your business name in the **"Studio name:"** field (**Enter your studio name**).
+3. Check the table columns: **Area**, **Typical Inspection Item**, **Regulatory Body / Standard**, **Evidence Location / Tool**, **Current Status**, and **Last Checked Date**.
+4. Click **Print Inspection Binder Index** to print the overview or save it as a PDF.
+
+### Step 8: Reset all statuses when you need a clean slate
+
+1. Click **Reset All Statuses** to clear all entries.
+2. Confirm the safety dialog: *"Are you sure you want to reset all preparation statuses? This will clear all entries in this browser."*
+3. All entries return to **Unchecked**.
+
+### Step 9: Adjust the view and embed the tool
+
+1. Click **Toggle dark mode** to switch between light and dark themes.
+2. Choose your language from the **"Language:"** selector.
+3. Click **Free Embed** to open the **"Use This Free Tool on Your Website"** window, then copy the HTML with **Copy Code**.
+
+---
+
+## What the Tool Does Not Do
+
+The tool deliberately excludes functions reserved for specialist applications or inspecting authorities:
+
+- It does not calculate autoclave hold times or biological indicator incubation periods.
+- It does not generate clinical waste transfer notes or weigh sharps containers.
+- It does not manage refresher deadlines for bloodborne pathogen training certificates.
+- It does not capture electronic signatures, health questionnaires, or client ID copies.
+- It does not award compliance badges or formal conformity certificates.
+- It does not submit licence applications or notifications to authorities or councils.
+
+---
+
+## Where Your Data Is Stored
+
+All entries and settings stay exclusively in your browser's local storage (`localStorage`) on your device. Nothing is transmitted to Poli International or any external server.
+
+Three storage keys are used:
+
+- `studio_inspection_readiness_status`: maps each item ID to its status (`ready`, `not_yet`, or `na`).
+- `studio_inspection_readiness_region`: stores the selected region code (`uk`, `eu`, `us`, or `au`).
+- `studio_inspection_readiness_studioname`: stores the studio name entered for the binder index cover sheet.
+
+Data is cleared by clicking **Reset All Statuses**, clearing your browser's site data, or closing private browsing windows. Exporting via **Print Inspection Binder Index** produces a document with the studio name, region, date, and the inspection table with blank sign-off lines.
+
+---
+
+## Printing and Exporting the Binder Index
+
+The **Inspection Binder Index** view is optimised for the inspection visit itself:
+
+- Print stylesheets hide navigation bars, dark backgrounds, buttons, and embed windows.
+- Output prints in high-contrast black on white, sized for A4 or US Letter.
+- The table lists all items grouped by area, with regulatory references, evidence locations, current status, and a **Last Checked Date** row for handwritten initials and dates.
+- The page can be printed directly for the front of your hygiene binder or archived as a PDF.
+
+---
+
+## Use-Case Examples
+
+### Example 1: A UK studio preparing for an unannounced visit
+
+A London tattoo studio selects **United Kingdom** as its region. The owner works through the **Inspection Checklist** tab, setting hand hygiene items to **Ready** and marking the autoclave documentation item as **Not yet**. They open the linked evidence tool from that item, complete the log, file it, then return and set the item to **Ready**. The counter bar now shows zero items under **Still to Prepare**. They open the **Inspection Binder Index** tab, enter their studio name, and print the index for the front of their binder.
+
+### Example 2: A US studio using single-use sterile equipment only
+
+A piercing studio in Texas selects **United States** as its region. Because it uses only pre-sterilised single-use equipment, the owner marks the autoclave-related item as **Not applicable**. That item drops out of the **Items to Prepare** tab, keeping the open-task list focused on what actually applies. The remaining items, covering sharps disposal, consent records, and premises layout, are worked through and marked **Ready**.
+
+### Example 3: An EU studio building a physical inspection binder
+
+A Berlin studio selects **European Union** as its region. The owner uses the **Where the evidence is kept** field on each item to note which binder tab holds each document. When the inspector asks for sterilisation cycles, waste transfer notes, or safety data sheets, the printed **Inspection Binder Index** points directly to the relevant tab. Each row is initialled and dated by hand as an internal control record.
+
+---
+
+## Frequently Asked Questions (FAQ)
+
+### Does completing this checklist guarantee my studio will pass a health inspection?
+
+No. This checklist is an internal preparation aid and a document location index, not an official certificate. Only your local health authority or licensing body can grant approval after an on-site visit. Careful preparation ensures all evidence is at hand when the inspector arrives.
+
+### Which regional jurisdictions does the checklist support?
+
+The checklist covers four regions: the United Kingdom, the European Union, the United States, and Australia. Selecting a region adapts the requirements to the relevant authorities, such as local health departments in Europe or OSHA in the US. Studios outside these zones should follow their local authority's requirements.
+
+### Why does the tool show counters instead of a percentage compliance score?
+
+Hygiene regulations are mandatory prerequisites, where a missing sharps container cannot be offset by a tidy waiting area. A percentage would create a false sense of security despite serious findings. Plain counters focus attention on what is still outstanding.
+
+### Where is my data stored, and can anyone else access it?
+
+All entries are stored exclusively in your browser's local storage on your device. No data is transmitted over the internet, and there is no central database. Clearing your browser data or using a private window removes all saved statuses immediately.
+
+### How do I use the Inspection Binder Index on the day of the inspection?
+
+Print the index table and place it as the first page in your hygiene binder. When the inspector asks to see sterilisation cycles, waste transfer notes, or safety data sheets, the index points directly to the relevant tab. You can initial and date each row by hand as an internal control record.
+
+### Is the checklist suitable for both tattoo and piercing studios?
+
+Yes. The list covers the core standards for disinfection, asepsis, waste disposal, and record-keeping that apply to both professions. Items that do not apply to your setup, such as an autoclave when you use only sterile single-use items, can simply be marked as not applicable, keeping your task list focused.
+
+### How do I link specialist records like autoclave logs and waste transfer notes?
+
+Items with extended documentation duties include a link labelled **Open Poli Evidence Tool**. This takes you to specialist tools for autoclave parameters, waste disposal records, BBP training, and consent forms. File the generated records in your binder and mark the item as ready in the checklist.
+
+### What happens if the health authority requires something not listed?
+
+Local hygiene ordinances, building authority conditions, or lease requirements can exceed the national minimum standard. The checklist summarises the recognised professional standard but cannot account for every local bylaw. Always follow the written instructions and inspection reports from your local authority.
+
+### Can I embed this checklist on my studio website?
+
+Yes. Click **Free Embed** to open the embed window, then use **Copy Code** to copy the HTML iframe snippet. The embedded version hides the header, footer, and navigation elements so it fits cleanly into your own site.
+
+### Does the tool work in my language?
+
+The interface is available in seven languages: English, German, Spanish, French, Italian, Portuguese, and Dutch. Use the **Language:** selector in the header to switch.
+
+---
 
 ## Structured Data
 
 ```json
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Studio Compliance Auditor",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Web",
-  "browserRequirements": "Requires JavaScript",
-  "description": "Free tool to audit tattoo and piercing studios against health, safety, and legal compliance standards. Generate compliance reports with real-time scoring.",
-  "url": "https://poliinternational.com/tools/studio-compliance-checklist/",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "Poli International"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "ratingCount": "127",
-    "bestRating": "5"
-  }
-}
-```
-
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@graph": [
     {
-      "@type": "Question",
-      "name": "What compliance standards does this tool check?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The tool checks against industry-standard biosecurity, legal documentation, and facility requirements for tattoo and piercing studios. It covers 15 specific items across three categories with weighted scoring."
-      }
+      "@type": "SoftwareApplication",
+      "name": "Studio Inspection Readiness Checklist",
+      "url": "https://poliinternational.com/tools/studio-compliance-checklist/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Inspection preparation checklist and binder index for body piercing and tattoo studios across the UK, EU, US, and Australia. Tracks evidence locations for health and safety inspections.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "20 inspection items across 8 hygiene and safety areas",
+        "Region-specific requirements for UK, EU, US, and Australia",
+        "Preparation status tracking: Ready, Not yet, Not applicable, Unchecked",
+        "Evidence location notes for each item",
+        "Printable inspection binder index with sign-off rows",
+        "Seven interface languages",
+        "Local browser storage only, no data transmission"
+      ],
+      "inLanguage": ["en", "de", "es", "fr", "it", "pt", "nl"]
     },
     {
-      "@type": "Question",
-      "name": "Is this tool an official health department inspection?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. This is a self-assessment tool for internal use. Always consult with local health authorities for official compliance verification."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How is the compliance score calculated?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Each item has a weight (2, 5, 10, or 15). The total possible score is 117. Your score is (checked items' total weight / 117) × 100."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What does CRITICAL FAILURE mean?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A score below 80% indicates significant compliance gaps that require immediate attention before a health inspection."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I save my audit results?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The tool does not save data between sessions. Use the print report function to save your results."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is a spore test and why is it weighted at 10?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A spore test (biological indicator) validates that your autoclave is actually killing microorganisms. It's weighted heavily because it's a critical safety verification."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I need a separate room for sterilization?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, the tool checks for a sterilization room separate from the procedure area (weight: 10). This is a standard requirement in most jurisdictions."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What counts as EPA-registered hospital-grade disinfectant?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Products registered with the EPA specifically for hospital use, with claims against bloodborne pathogens and tuberculosis. Alcohol is not sufficient."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How often should I run this audit?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Monthly internal audits are recommended, with quarterly formal audits using this tool."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I use this for a piercing-only studio?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. The tool covers standards applicable to both tattoo and piercing studios, including sharps disposal, sterilization, and facility requirements."
-      }
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does completing this checklist guarantee my studio will pass a health inspection?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. This checklist is an internal preparation aid and a document location index, not an official certificate. Only your local health authority or licensing body can grant approval after an on-site visit. Careful preparation ensures all evidence is at hand when the inspector arrives."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which regional jurisdictions does the checklist support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The checklist covers four regions: the United Kingdom, the European Union, the United States, and Australia. Selecting a region adapts the requirements to the relevant authorities, such as local health departments in Europe or OSHA in the US. Studios outside these zones should follow their local authority's requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the tool show counters instead of a percentage compliance score?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hygiene regulations are mandatory prerequisites, where a missing sharps container cannot be offset by a tidy waiting area. A percentage would create a false sense of security despite serious findings. Plain counters focus attention on what is still outstanding."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is my data stored, and can anyone else access it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "All entries are stored exclusively in your browser's local storage on your device. No data is transmitted over the internet, and there is no central database. Clearing your browser data or using a private window removes all saved statuses immediately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I use the Inspection Binder Index on the day of the inspection?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Print the index table and place it as the first page in your hygiene binder. When the inspector asks to see sterilisation cycles, waste transfer notes, or safety data sheets, the index points directly to the relevant tab. You can initial and date each row by hand as an internal control record."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the checklist suitable for both tattoo and piercing studios?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The list covers the core standards for disinfection, asepsis, waste disposal, and record-keeping that apply to both professions. Items that do not apply to your setup, such as an autoclave when you use only sterile single-use items, can simply be marked as not applicable, keeping your task list focused."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I link specialist records like autoclave logs and waste transfer notes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Items with extended documentation duties include a link labelled Open Poli Evidence Tool. This takes you to specialist tools for autoclave parameters, waste disposal records, BBP training, and consent forms. File the generated records in your binder and mark the item as ready in the checklist."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if the health authority requires something not listed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Local hygiene ordinances, building authority conditions, or lease requirements can exceed the national minimum standard. The checklist summarises the recognised professional standard but cannot account for every local bylaw. Always follow the written instructions and inspection reports from your local authority."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I embed this checklist on my studio website?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Click Free Embed to open the embed window, then use Copy Code to copy the HTML iframe snippet. The embedded version hides the header, footer, and navigation elements so it fits cleanly into your own site."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the tool work in my language?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The interface is available in seven languages: English, German, Spanish, French, Italian, Portuguese, and Dutch. Use the Language selector in the header to switch."
+          }
+        }
+      ]
     }
   ]
 }
 ```
 
+---
+
 ## Internal Linking Suggestions
 
-| Page Topic | Anchor Text | URL |
-|------------|-------------|-----|
-| Studio Operations Wiki | Studio compliance standards | `/wiki/studio-operations/` |
-| Health Department Preparation | Preparing for health inspections | `/blog/health-inspection-preparation/` |
-| Autoclave Maintenance | Autoclave validation guide | `/blog/autoclave-maintenance/` |
-| Bloodborne Pathogen Training | BBP certification requirements | `/blog/bloodborne-pathogen-training/` |
-| Consent Form Templates | Client consent form best practices | `/blog/consent-form-templates/` |
-| Studio Design Guide | Facility layout requirements | `/blog/studio-design-guide/` |
-| Infection Control Protocols | Infection control for body art | `/blog/infection-control-protocols/` |
-| All Poli Tools | Explore more studio tools | `/tools/` |
+Link to relevant Poli wiki and blog topics that support the inspection preparation workflow:
+
+- **Autoclave Calculator** (`/autoclave-calculator/`): for sterilisation cycle parameters referenced by the sterilisation and instrument reprocessing area.
+- **Sharps Disposal Tracker** (`/sharps-disposal-tracker/`): for clinical waste transfer notes and sharps container records.
+- **BBP Training Tracker** (`/bbp-training-tracker/`): for bloodborne pathogen training refresher deadlines.
+- **Consent Form Builder** (`/form-builder/`): for consent records and client documentation referenced in the consent and archiving area.
+- **Wiki: Body Art Regulations by Region**: a reference article covering UK, EU, US, and Australian requirements.
+- **Blog: How to Build a Studio Hygiene Binder**: a practical guide to assembling the physical binder the index is designed for.
+- **Blog: What Health Inspectors Ask to See First**: a walkthrough of the evidence locations tracked by the checklist.
+- **Wiki: Studio Zone Separation and Premises Layout**: background on the premises layout and functional zone separation area.
+- **Blog: Choosing Between Single-Use and Reusable Equipment**: context for marking autoclave items as not applicable.

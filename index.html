@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="robots" content="noindex, nofollow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studio Compliance Checklist | Poli International</title>
-    <meta name="description" content="Professional health and safety auditor for tattoo and piercing studios. Verify compliance with global biosecurity and legal standards.">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Studio Inspection Readiness Checklist | Poli International</title>
+    <meta name="description" content="Inspection preparation checklist and binder index for body piercing and tattoo studios across the UK, EU, US, and Australia. Tracks evidence locations for health and safety inspections.">
+    <meta property="og:title" content="Studio Inspection Readiness Checklist | Poli International">
+    <meta property="og:description" content="Inspection preparation checklist and binder index for body piercing and tattoo studios across the UK, EU, US, and Australia. Tracks evidence locations for health and safety inspections.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="/tools/studio-compliance-checklist/css/style.css">
     
     <!-- IFRAME CONTENT HIDER -->
     <script>
@@ -34,26 +36,42 @@
         }
     })();
     </script>
+  <script src="/js/input-guards.js"></script>
+  <link rel="stylesheet" href="/tools/shared/print.css" media="print">
+  <link rel="stylesheet" href="/tools/shared/a11y.css">
 </head>
 <body class="dark-mode">
-
     <!-- STANDARD HEADER -->
     <header class="site-header">
         <div class="container site-header__container">
             <div class="site-header__logo-container">
-                <img src="images/Poli-International-Co.webp" alt="Poli International" class="site-header__logo">
+                <img src="/tools/studio-compliance-checklist/images/Poli-International-Co.webp" alt="Poli International" class="site-header__logo">
             </div>
             <div class="site-header__title-group">
-                <h2 class="site-header__title">Studio Compliance Checklist</h2>
-                <p class="site-header__subtitle">Global Health & Safety Audit Engine</p>
+                <h1 class="site-header__title" id="appHeaderTitle">Studio Inspection Readiness Checklist</h1>
+                <p class="site-header__subtitle" id="appHeaderSubtitle">Preparation checklist &amp; inspection binder index for tattoo and body piercing studios</p>
             </div>
             <div class="site-header__actions">
-                <button id="embedBtn" class="btn btn--primary btn--small">
+                <!-- Visible Language Selector (Rule 6) -->
+                <div class="lang-selector-group">
+                    <label for="languageSelector" class="visually-hidden" id="langSelectLabel">Language:</label>
+                    <select id="languageSelector" class="lang-selector" aria-label="Select language">
+                        <option value="en">English</option>
+                        <option value="de">Deutsch</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="it">Italiano</option>
+                        <option value="pt">Português</option>
+                        <option value="nl">Nederlands</option>
+                    </select>
+                </div>
+
+                <button id="embedBtn" class="btn btn--primary btn--small" type="button">
                     <span class="embed-icon">⚡</span>
-                    <span class="embed-text">Free Embed</span>
+                    <span id="embedBtnText">Free Embed</span>
                 </button>
                 
-                <button id="darkModeToggle" class="btn btn--icon" aria-label="Toggle dark mode">
+                <button id="darkModeToggle" class="btn btn--icon" type="button" aria-label="Toggle dark mode">
                     <span class="dark-mode-icon">◐</span>
                 </button>
             </div>
@@ -62,10 +80,8 @@
 
     <main class="checklist-engine">
         <div class="container">
-            <!-- App UI goes here -->
-            <div id="app-root">
-                <div class="loading-state">Initializing Compliance Database...</div>
-            </div>
+            <!-- App Root dynamically filled by main.js through t() -->
+            <div id="app-root"></div>
         </div>
     </main>
 
@@ -74,62 +90,50 @@
         <div class="container">
             <div class="site-footer__content">
                 <div class="site-footer__brand">
-                    <img src="images/Poli-International-Co.webp" alt="Poli International" class="site-footer__logo">
-                    <p class="site-footer__tagline">Engineering Excellence in Body Art Compliance</p>
+                    <img src="/tools/studio-compliance-checklist/images/Poli-International-Co.webp" alt="Poli International" class="site-footer__logo">
+                    <p class="site-footer__tagline" id="footerTagline">Free professional tools published for tattoo artists, piercers, and studio owners by Poli International</p>
                 </div>
                 <div class="site-footer__support">
-                    <p class="support-text">Enjoying this professional tool? Support our innovation.</p>
-                    
+                    <p class="support-privacy" id="footerPrivacy">Privacy Notice: Status is stored locally in your browser (localStorage) and is never transmitted to any server.</p>
                 </div>
             </div>
             <div class="site-footer__bottom">
-                <p class="copyright">© 2026 Poli International Ltd. | Professional Use Only</p>
-                <p class="disclaimer">⚠️ DISCLAIMER: This tool is for internal auditing only and does not constitute a legal guarantee of compliance. Always verify with your local health authority.</p>
+                <p class="copyright">&copy; 2026 Poli International Ltd. | Professional Use Only</p>
+                <p class="disclaimer" id="footerDisclaimer">&#9888; DISCLAIMER: This tool is for internal preparation only and does not constitute a legal guarantee of compliance. Always verify your studio requirements with your local licensing authority.</p>
             </div>
         </div>
     </footer>
 
     <!-- EMBED MODAL -->
-    <div id="embedModal" class="modal" style="display: none;">
+    <div id="embedModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">🎁 Use This Tool FREE on Your Website!</h2>
-                <span class="modal-close" id="modalClose">&times;</span>
+                <h2 id="modalTitle" class="modal-title">Use This Free Tool on Your Website</h2>
+                <button type="button" class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p class="modal-description">Embed this professional compliance auditor on your studio site - completely free!</p>
-
+                <p class="modal-description" id="modalDesc">Embed this inspection readiness checklist on your studio website, completely free.</p>
                 <div class="modal-section">
-                    <h3 class="modal-section-title">📋 Copy Embed Code</h3>
+                    <h3 class="modal-section-title" id="modalCodeTitle">Copy Embed Code</h3>
                     <div class="code-container">
-                        <textarea id="embedCode" class="embed-code-textarea" readonly></textarea>
-                        <button id="copyEmbedCode" class="btn btn--primary btn--small">📋 Copy Code</button>
+                        <textarea id="embedCode" class="embed-code-textarea" readonly aria-label="Embed HTML code"></textarea>
+                        <button id="copyEmbedCode" class="btn btn--primary btn--small" type="button">📋 Copy Code</button>
                     </div>
                 </div>
-
                 <div class="modal-section">
-                    <h3 class="modal-section-title">💾 Download or Explore</h3>
+                    <h3 class="modal-section-title" id="modalMoreToolsTitle">Explore More Free Tools</h3>
                     <div class="btn-group">
-                        <a href="embed.html" download class="btn btn--secondary">⬇️ Download HTML</a>
-                        <a href="https://poliinternational.com/tools" target="_blank" class="btn btn--primary">🔗 More Free Tools</a>
+                        <a id="moreToolsBtn" href="#" target="_top" class="btn btn--primary">🔗 More Free Tools</a>
                     </div>
-                </div>
-
-                <div class="modal-section">
-                    <h3 class="modal-section-title">🔔 Get Notified of New Tools!</h3>
-                    <form id="modal-email-form" class="email-form" data-location="modal">
-                        <div class="email-input-group">
-                            <input type="email" class="email-input" placeholder="Your email address" required>
-                            <button type="submit" class="btn btn--primary">Subscribe</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="js/database.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/common.js"></script>
+    <!-- Scripts in strict order: i18n dictionary first, then database, main application logic, and common utilities -->
+    <script src="/tools/studio-compliance-checklist/js/i18n.js"></script>
+    <script src="/tools/studio-compliance-checklist/js/database.js"></script>
+    <script src="/tools/studio-compliance-checklist/js/main.js"></script>
+    <script src="/tools/studio-compliance-checklist/js/common.js"></script>
 </body>
 </html>

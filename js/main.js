@@ -126,10 +126,10 @@
         setElText('modalMoreToolsTitle', t('modal.more_tools'));
 
         const copyBtn = document.getElementById('copyEmbedCode');
-        if (copyBtn) copyBtn.innerHTML = '📋 ' + t('modal.copy_code');
+        if (copyBtn) copyBtn.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clipboard></use></svg> ' + t('modal.copy_code');
 
         const moreToolsBtn = document.getElementById('moreToolsBtn');
-        if (moreToolsBtn) moreToolsBtn.innerHTML = '🔗 ' + t('modal.more_tools');
+        if (moreToolsBtn) moreToolsBtn.innerHTML = '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-link></use></svg> ' + t('modal.more_tools');
 
         const modalClose = document.getElementById('modalClose');
         if (modalClose) modalClose.setAttribute('aria-label', t('modal.close'));
@@ -166,7 +166,7 @@
             <div class="control-panel">
                 <div class="region-section">
                     <label class="region-label">
-                        <span class="region-icon">🌐</span>
+                        <span class="region-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-globe></use></svg></span>
                         ${escapeHtml(t('region.label'))}
                     </label>
                     <div class="region-buttons" role="group" aria-label="${escapeHtml(t('region.label'))}">
@@ -185,7 +185,7 @@
         html += `
                     </div>
                     <div class="region-note">
-                        <span class="note-bullet">ℹ️</span>
+                        <span class="note-bullet"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-info></use></svg></span>
                         <span>${escapeHtml(t(activeRegionObj.noteKey))}</span>
                     </div>
                 </div>
@@ -219,21 +219,21 @@
                 <div class="view-tabs">
                     <div class="tab-group" role="tablist">
                         <button type="button" role="tab" class="tab-btn ${currentTab === 'checklist' ? 'is-active' : ''}" data-tab="checklist">
-                            📋 ${escapeHtml(t('nav.checklist'))}
+                            <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clipboard></use></svg> ${escapeHtml(t('nav.checklist'))}
                         </button>
                         <button type="button" role="tab" class="tab-btn ${currentTab === 'pending' ? 'is-active' : ''}" data-tab="pending">
-                            ⚠️ ${escapeHtml(t('nav.pending'))} (${counts.notYetCount})
+                            <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-warn></use></svg> ${escapeHtml(t('nav.pending'))} (${counts.notYetCount})
                         </button>
                         <button type="button" role="tab" class="tab-btn ${currentTab === 'binder' ? 'is-active' : ''}" data-tab="binder">
-                            🗂️ ${escapeHtml(t('nav.binder'))}
+                            <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-folder></use></svg> ${escapeHtml(t('nav.binder'))}
                         </button>
                     </div>
                     <div class="action-buttons">
                         <button type="button" id="clearAllBtn" class="btn btn--secondary btn--small" title="${escapeHtml(t('actions.clear_all'))}">
-                            🗑️ ${escapeHtml(t('actions.clear_all'))}
+                            <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-trash></use></svg> ${escapeHtml(t('actions.clear_all'))}
                         </button>
                         <button type="button" id="printBinderBtn" class="btn btn--primary btn--small">
-                            🖨️ ${escapeHtml(t('actions.print_binder'))}
+                            <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-print></use></svg> ${escapeHtml(t('actions.print_binder'))}
                         </button>
                     </div>
                 </div>
@@ -248,7 +248,7 @@
             if (pendingItems.length === 0) {
                 html += `
                     <div class="empty-state">
-                        <div class="empty-icon">✅</div>
+                        <div class="empty-icon"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg></div>
                         <h3 class="empty-title">${escapeHtml(t('pending.empty_title'))}</h3>
                         <p class="empty-desc">${escapeHtml(t('pending.empty_desc'))}</p>
                     </div>
@@ -300,11 +300,11 @@
 
                             <div class="item-meta-grid">
                                 <div class="meta-block">
-                                    <span class="meta-label">⚖️ ${escapeHtml(t('item.authority_standard'))}</span>
+                                    <span class="meta-label"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-scale></use></svg> ${escapeHtml(t('item.authority_standard'))}</span>
                                     <span class="meta-value meta-value--auth">${escapeHtml(t(authKey))}</span>
                                 </div>
                                 <div class="meta-block">
-                                    <span class="meta-label">📁 ${escapeHtml(t('item.evidence_location'))}</span>
+                                    <span class="meta-label"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-folder></use></svg> ${escapeHtml(t('item.evidence_location'))}</span>
                                     <span class="meta-value">${escapeHtml(t(evidenceKey))}</span>
                                     <span class="evidence-type-tag">${escapeHtml(t(item.evidenceTypeKey))}</span>
                                 </div>
@@ -314,16 +314,16 @@
                         <div class="item-controls">
                             ${item.evidenceToolSlug ? `
                                 <a href="${POLI_BASE_URL}${item.evidenceToolSlug}/" target="_top" class="btn btn--secondary btn--small tool-link">
-                                    ⚡ ${escapeHtml(t('item.open_tool'))}
+                                    <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-bolt></use></svg> ${escapeHtml(t('item.open_tool'))}
                                 </a>
                             ` : ''}
 
                             <div class="status-selector" role="group" aria-label="${escapeHtml(t('status.set_label'))}">
                                 <button type="button" class="btn-status btn-status--ready ${status === 'ready' ? 'is-active' : ''}" data-item="${item.id}" data-set="ready">
-                                    ✓ ${escapeHtml(t('status.ready'))}
+                                    <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-check></use></svg> ${escapeHtml(t('status.ready'))}
                                 </button>
                                 <button type="button" class="btn-status btn-status--not-yet ${status === 'not_yet' ? 'is-active' : ''}" data-item="${item.id}" data-set="not_yet">
-                                    ✕ ${escapeHtml(t('status.not_yet'))}
+                                    <svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-x></use></svg> ${escapeHtml(t('status.not_yet'))}
                                 </button>
                                 <button type="button" class="btn-status btn-status--na ${status === 'na' ? 'is-active' : ''}" data-item="${item.id}" data-set="na">
                                     - ${escapeHtml(t('status.na'))}
@@ -355,7 +355,7 @@
             <div class="binder-wrapper">
                 <div class="binder-meta-header">
                     <div class="binder-header-main">
-                        <h2 class="binder-title">📋 ${escapeHtml(t('binder.title'))}</h2>
+                        <h2 class="binder-title"><svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clipboard></use></svg> ${escapeHtml(t('binder.title'))}</h2>
                         <p class="binder-disclaimer-top">${escapeHtml(t('binder.print_disclaimer'))}</p>
                     </div>
 
@@ -529,11 +529,11 @@
     // Regional flag helper
     function getRegionFlag(regId) {
         switch (regId) {
-            case 'uk': return '🇬🇧';
-            case 'eu': return '🇪🇺';
-            case 'us': return '🇺🇸';
-            case 'au': return '🇦🇺';
-            default: return '🌐';
+            case 'uk': return '';
+            case 'eu': return '';
+            case 'us': return '';
+            case 'au': return '';
+            default: return '<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-globe></use></svg>';
         }
     }
 

@@ -10,14 +10,14 @@ var REGIONS = [
 ];
 
 var GROUPS = [
-  { id: 1, titleKey: "group.1.title", icon: "🧼" },
-  { id: 2, titleKey: "group.2.title", icon: "🧪" },
-  { id: 3, titleKey: "group.3.title", icon: "♨️" },
-  { id: 4, titleKey: "group.4.title", icon: "🗑️" },
-  { id: 5, titleKey: "group.5.title", icon: "🎓" },
-  { id: 6, titleKey: "group.6.title", icon: "📋" },
-  { id: 7, titleKey: "group.7.title", icon: "🏢" },
-  { id: 8, titleKey: "group.8.title", icon: "💎" }
+  { id: 1, titleKey: "group.1.title", icon: "<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-pouch></use></svg>" },
+  { id: 2, titleKey: "group.2.title", icon: "<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-flask></use></svg>" },
+  { id: 3, titleKey: "group.3.title", icon: "<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-thermo></use></svg>" },
+  { id: 4, titleKey: "group.4.title", icon: "<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-trash></use></svg>" },
+  { id: 5, titleKey: "group.5.title", icon: "<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-book></use></svg>" },
+  { id: 6, titleKey: "group.6.title", icon: "<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-clipboard></use></svg>" },
+  { id: 7, titleKey: "group.7.title", icon: "<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-building></use></svg>" },
+  { id: 8, titleKey: "group.8.title", icon: "<svg class=ti-i width=1.15em height=1.15em aria-hidden=true style=vertical-align:-.18em;flex:none><use href=../shared/icons.svg#i-ring></use></svg>" }
 ];
 
 var CHECKLIST_ITEMS = [

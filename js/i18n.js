@@ -7,6 +7,9 @@
 
   var DICTIONARIES = {
   "en": {
+    "a11y.toggle_dark_mode": "Toggle dark mode",
+    "a11y.close_modal": "Close modal",
+    "a11y.embed_html_code": "Embed HTML code",
     "app.title": "Studio Inspection Readiness Checklist",
     "app.subtitle": "Preparation checklist & inspection binder index for tattoo and body piercing studios",
     "nav.checklist": "Readiness Checklist",
@@ -342,6 +345,9 @@
     "item.g8_jewellery_cert.evidence.au": "Supplier material specification sheets and compliance certificates on file in the inspection folder for all initial jewellery."
   },
   "de": {
+    "a11y.toggle_dark_mode": "Dunkelmodus ein- oder ausschalten",
+    "a11y.close_modal": "Fenster schließen",
+    "a11y.embed_html_code": "HTML-Einbettungscode",
     "app.title": "Checkliste zur Vorbereitung auf Studio-Inspektionen",
     "app.subtitle": "Vorbereitungs-Checkliste und Ordner-Index für Tattoo- und Piercingstudios",
     "nav.checklist": "Prüf-Checkliste",
@@ -677,6 +683,9 @@
     "item.g8_jewellery_cert.evidence.au": "Materialdatenblätter der Lieferanten und Konformitätsbescheinigungen im Prüfordner für den gesamten Erstschmuck."
   },
   "es": {
+    "a11y.toggle_dark_mode": "Activar o desactivar el modo oscuro",
+    "a11y.close_modal": "Cerrar la ventana",
+    "a11y.embed_html_code": "Código HTML de inserción",
     "app.title": "Lista de Preparación para la Inspección del Estudio",
     "app.subtitle": "Lista de preparación e índice de archivador para estudios de tatuaje y piercing",
     "nav.checklist": "Lista de Inspección",
@@ -1012,6 +1021,9 @@
     "item.g8_jewellery_cert.evidence.au": "Fichas de especificación de materiales del proveedor y certificados archivados para toda la joyería inicial."
   },
   "fr": {
+    "a11y.toggle_dark_mode": "Activer ou désactiver le mode sombre",
+    "a11y.close_modal": "Fermer la fenêtre",
+    "a11y.embed_html_code": "Code HTML d'intégration",
     "app.title": "Liste de Préparation à l'Inspection du Studio",
     "app.subtitle": "Check-list de préparation et index du classeur pour studios de tatouage et piercing",
     "nav.checklist": "Liste de Contrôle",
@@ -1347,6 +1359,9 @@
     "item.g8_jewellery_cert.evidence.au": "Fiches techniques des matériaux des fournisseurs et certificats de conformité classés pour tous les bijoux de pose."
   },
   "it": {
+    "a11y.toggle_dark_mode": "Attiva o disattiva la modalità scura",
+    "a11y.close_modal": "Chiudi la finestra",
+    "a11y.embed_html_code": "Codice HTML di incorporamento",
     "app.title": "Checklist di Preparazione all'Ispezione dello Studio",
     "app.subtitle": "Checklist di preparazione e indice del raccoglitore per studi di tatuaggio e piercing",
     "nav.checklist": "Checklist di Ispezione",
@@ -1682,6 +1697,9 @@
     "item.g8_jewellery_cert.evidence.au": "Schede tecniche dei materiali dei fornitori e certificati conservati nel raccoglitore per tutta la gioielleria iniziale."
   },
   "pt": {
+    "a11y.toggle_dark_mode": "Ativar ou desativar o modo escuro",
+    "a11y.close_modal": "Fechar a janela",
+    "a11y.embed_html_code": "Código HTML de incorporação",
     "app.title": "Lista de Preparação para Inspeção do Estúdio",
     "app.subtitle": "Lista de preparação e índice de pasta para estúdios de tatuagem e piercing",
     "nav.checklist": "Lista de Verificação",
@@ -2017,6 +2035,9 @@
     "item.g8_jewellery_cert.evidence.au": "Fichas de especificação de materiais dos fornecedores e certificados arquivados para toda a joalharia de primeira colocação."
   },
   "nl": {
+    "a11y.toggle_dark_mode": "Donkere modus aan of uit",
+    "a11y.close_modal": "Venster sluiten",
+    "a11y.embed_html_code": "HTML-insluitcode",
     "app.title": "Checklist voor Studio-Inspectiegereedheid",
     "app.subtitle": "Voorbereidingschecklist en mapindex voor tattoo- en piercingstudio's",
     "nav.checklist": "Gereedheidschecklist",
@@ -2352,6 +2373,9 @@
     "item.g8_jewellery_cert.evidence.au": "Materiaalspecificaties en conformiteitscertificaten van de leverancier in de inspectiemap voor alle eerste insetsieraden."
   },
   "th": {
+    "a11y.toggle_dark_mode": "เปิดหรือปิดโหมดมืด",
+    "a11y.close_modal": "ปิดหน้าต่าง",
+    "a11y.embed_html_code": "โค้ด HTML สำหรับฝัง",
     "app.title": "รายการตรวจสอบความพร้อมสำหรับการตรวจสถานประกอบการ",
     "app.subtitle": "รายการเตรียมความพร้อมและดัชนีแฟ้มเอกสารการตรวจสอบสำหรับสตูดิโอสักและเจาะร่างกาย",
     "nav.checklist": "รายการตรวจสอบความพร้อม",

@@ -139,6 +139,7 @@
 
         const langSelectLabel = document.getElementById('langSelectLabel');
         if (langSelectLabel) langSelectLabel.textContent = t('buttons.lang_select');
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(el => el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria-label'))));
 
         const langSelect = document.getElementById('languageSelector');
         if (langSelect) {
